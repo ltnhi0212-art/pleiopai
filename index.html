@@ -1,198 +1,122 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PLEI OP AI · Làng Plei Ơp</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#fbefd5;--card:#fffaf0;--ink:#2b1a10;--red:#c1272d;--gold:#f2b01e;--green:#2e7d32;--orange:#e8741e;--teal:#16939a;--hero:#2a0f0a;--line:#ecd5a8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1210;--card:#2a1c16;--ink:#f6e8d0;--line:#54392b}}
-:root[data-theme="dark"]{--bg:#1a1210;--card:#2a1c16;--ink:#f6e8d0;--line:#54392b}
-html,body{height:100%;margin:0}
-body{display:flex;flex-direction:column;color:var(--ink);font-family:"Be Vietnam Pro",system-ui,sans-serif;background:radial-gradient(circle at 8% 0,rgba(242,176,30,.35),transparent 38%),radial-gradient(circle at 100% 40%,rgba(46,125,50,.22),transparent 40%),radial-gradient(circle at 0 100%,rgba(193,39,45,.2),transparent 40%),var(--bg)}
-.hero{background:linear-gradient(120deg,var(--hero),#6b1b12 55%,#2e5a22);color:#fff3d6;padding:12px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-.gong{width:58px;height:58px;flex:none;position:relative;animation:sway 4s ease-in-out infinite}
-.gong svg{width:100%;height:100%}.gong::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--gold);animation:ring 2.4s infinite}
-@keyframes ring{from{transform:scale(.85);opacity:.9}to{transform:scale(1.3);opacity:0}}
-@keyframes sway{50%{transform:rotate(6deg)}}
-.hero h1{margin:0;font:700 22px "Noto Serif",Georgia,serif}
-.hero p{margin:2px 0 0;font-size:12.5px;opacity:.85}
-.t{flex:1;min-width:180px}
-.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.badge{font-size:11.5px;background:rgba(242,176,30,.18);border:1px solid var(--gold);color:var(--gold);padding:3px 9px;border-radius:12px}
-.vr{background:var(--gold);color:#2a0f0a;text-decoration:none;font-weight:600;font-size:13px;padding:6px 12px;border-radius:14px}
-select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3a1710;color:#fff3d6;font:inherit;font-size:13px;max-width:100%}
-.tho{height:12px;flex:none;background-color:#2a0f0a;background-image:linear-gradient(135deg,var(--red) 25%,transparent 25%),linear-gradient(225deg,var(--gold) 25%,transparent 25%),linear-gradient(315deg,var(--green) 25%,transparent 25%),linear-gradient(45deg,var(--orange) 25%,transparent 25%);background-size:24px 12px;background-position:-12px 0,-12px 0,0 0,0 0}
-#log{flex:1;overflow-y:auto;padding:14px 12px;scroll-behavior:smooth}
-.m a{color:inherit;text-decoration:underline;font-weight:600;word-break:break-all}
-.m{max-width:88%;margin:9px 0;padding:10px 14px;border-radius:18px;white-space:pre-wrap;line-height:1.55;overflow-wrap:anywhere;font-size:15px;animation:in .35s ease both}
-.u{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;margin-left:auto;border-bottom-right-radius:4px}
-.b{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-bottom-left-radius:4px;box-shadow:0 3px 10px rgba(80,30,10,.1)}
-.b::before{content:"PLEI OP AI";display:block;font-size:10.5px;letter-spacing:.8px;color:var(--red);font-weight:600;margin-bottom:3px}
-.dots i{display:inline-block;width:8px;height:8px;margin:0 2px;border-radius:50%;background:var(--red);animation:bn 1s infinite}
-.dots i:nth-child(2){background:var(--gold);animation-delay:.15s}.dots i:nth-child(3){background:var(--green);animation-delay:.3s}
-@keyframes bn{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-6px);opacity:1}}
-@keyframes in{from{opacity:0;transform:translateY(8px)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
-#chips{padding:0 12px 6px;display:flex;gap:7px;flex-wrap:wrap}
-#chips button{border:0;color:#fff;border-radius:16px;padding:7px 13px;cursor:pointer;font:inherit;font-size:13px;transition:transform .15s}
-#chips button:hover{transform:translateY(-2px)}
-#chips button:nth-child(1){background:var(--red)}#chips button:nth-child(2){background:var(--green)}#chips button:nth-child(3){background:var(--orange)}#chips button:nth-child(4){background:var(--teal)}
-#bar{display:flex;gap:8px;padding:6px 12px 6px}
-#q{flex:1;padding:12px 16px;border:2px solid var(--line);border-radius:26px;font:inherit;font-size:16px;background:var(--card);color:var(--ink);outline:none}
-#q:focus{border-color:var(--gold)}
-#send{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:0;border-radius:26px;padding:0 22px;cursor:pointer;font:600 15px "Be Vietnam Pro",sans-serif}
-#send:disabled{opacity:.5}
-.note{text-align:center;font-size:11px;opacity:.7;padding:0 12px 8px}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PLEI OP AI · Làng Plei Ơp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS giao diện cơ bản */
+    body { font-family: 'Be Vietnam Pro', sans-serif; margin: 0; padding: 20px; background: #f4f5f7; }
+    #log { max-width: 600px; margin: 0 auto 20px; background: #fff; padding: 15px; border-radius: 8px; max-height: 400px; overflow-y: auto; }
+    .msg { margin-bottom: 12px; }
+    .user { font-weight: 600; color: #0056b3; }
+    .assistant { color: #333; }
+    .input-area { max-width: 600px; margin: 0 auto; display: flex; gap: 8px; }
+    input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+    button { padding: 10px 16px; border: none; background: #0056b3; color: white; border-radius: 6px; cursor: pointer; }
+    button:disabled { background: #aaa; cursor: not-allowed; }
+    .dots i { display: inline-block; width: 4px; height: 4px; margin: 0 1px; background: #333; border-radius: 50%; animation: blink 1.4s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+  </style>
 </head>
 <body>
-<header class="hero">
-  <div class="gong" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#f2b01e"/><circle cx="32" cy="32" r="22" fill="none" stroke="#c1272d" stroke-width="3"/><circle cx="32" cy="32" r="13" fill="none" stroke="#7a3b10" stroke-width="2"/><circle cx="32" cy="32" r="6" fill="#7a3b10"/></svg></div>
-  <div class="t"><h1>PLEI OP AI</h1><p>Trợ lý hướng dẫn văn hóa · Làng Plei Ơp, Pleiku, Gia Lai</p></div>
-  <div class="tools">
-    <span class="badge">✔ Dữ liệu đã kiểm chứng · Đa ngôn ngữ</span>
-    <a class="vr" href="https://tour.panoee.net/vr360langop" target="_blank" rel="noopener">🥽 Mở tour VR360</a>
-    <select id="scene" aria-label="Cảnh VR360 đang xem"><option value="">Cảnh VR đang xem: (chưa chọn)</option></select>
+
+  <div id="log"></div>
+
+  <div class="input-area">
+    <input type="text" id="q" placeholder="Nhập tin nhắn..." autocomplete="off">
+    <button id="sendBtn">Gửi</button>
   </div>
-</header>
-<div class="tho"></div>
-<div id="log"></div>
-<div id="chips"></div>
-<div id="bar"><input id="q" placeholder="Hỏi bằng tiếng Việt, English, Français, 中文, 日本語..." autocomplete="off"><button id="send">Gửi</button></div>
-<div class="note">Chỉ trả lời dựa trên kho dữ liệu đã kiểm chứng của dự án. Nội dung ngoài kho dữ liệu sẽ được từ chối lịch sự.</div>
 
-<script>
-const SCENES = ["Cổng làng", "Nhà rông", "Cây nêu", "Khu tượng gỗ", "Nhà mồ", "Bến nước", "Bộ cồng chiêng"];
-const HOTSPOT_INTRO = {
-  "Cổng làng": "Kính chào quý khách đến với làng Plei Ơp, ngôi làng của đồng bào Jrai nằm giữa lòng thành phố Pleiku. Bạn muốn tìm hiểu điều gì về nơi đây?",
-  "Bộ cồng chiêng": "Bạn đang xem Bộ Cồng chiêng. Theo tài liệu của dự án, cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng), gắn với các lễ hội tại nhà rông."
-};
+  <script>
+    // --- KHỞI TẠO CÁC PHẦN TỬ PHẦN TỬ GIAO DIỆN ---
+    const log = document.getElementById("log");
+    const q = document.getElementById("q");
+    const sendBtn = document.getElementById("sendBtn");
 
-/* ===== NGUỒN VÀ ĐỘ TIN CẬY: trust 1 cao nhất, 3 thấp nhất ===== */
-const SOURCES = `
-[S1] trust=1 | Kho tri thức chính thống của dự án Số hóa Di sản VR360 làng Plei Ốp (tổng hợp từ Báo Dân tộc & Phát triển, Cục Du lịch Quốc gia, Ủy ban Nhà nước về người Việt Nam ở nước ngoài - SCOV)
-[S2] trust=2 | VTV.vn, "Khám phá Plei Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku", 19/01/2025 - https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm
-[S3] trust=2 | Báo Gia Lai (baogialai.com.vn - https://baogialai.com.vn): tin ra mắt tour cộng đồng 16/11/2024; tin phục dựng lễ cúng mừng nhà rông mới tại làng Ơp
-[S4] trust=2 | Tạp chí Người Đưa Tin (nguoiduatin.vn - https://nguoiduatin.vn), "Hòa mình vào văn hóa người Jrai giữa lòng phố núi Pleiku", 2026
-[S5] trust=3 | MIA.vn, "Làng văn hóa du lịch Plei Ốp, văn hóa bản địa trong lòng thành phố", 27/09/2023 - https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969
-[S6] trust=3 | Thông tin chung về nhà rông Tây Nguyên (cẩm nang du lịch, tài liệu giáo khoa), KHÔNG riêng cho Plei Ơp
-[S7] trust=2 | Các báo địa phương và trung ương khác (Báo Văn hóa, Nông nghiệp & Môi trường, Gia Lai TV) về quy hoạch làng văn hóa du lịch cộng đồng
-`;
+    // --- KHỞI TẠO & LẤY CAPABILITY CLAUDE ---
+    const history = [];
+    let sample = null;
 
-const KNOWLEDGE = `
-## A. Vị trí, quy mô, tên gọi
-- Plei nghĩa là "làng" trong tiếng Jrai; Plei Ơp (Plei Ốp, làng Ơp) là làng của đồng bào Jrai nằm giữa trung tâm Pleiku, Gia Lai. [S7]
-- Làng được VTV cho biết thành lập năm 1927, gần 100 năm tuổi; nhiều nguồn khác gọi là làng cổ hơn 100 năm tuổi. [S2][S5]
-- Các bài cũ ghi làng thuộc phường Hoa Lư; bài gần đây ghi phường Pleiku (sau sắp xếp hành chính). Cách trung tâm thành phố khoảng 3,4 km. [S5][S3] (địa chỉ hành chính là THÔNG TIN ĐỘNG)
-- Theo cẩm nang năm 2023: hơn 100 hộ, hơn 500 người; là làng văn hóa - du lịch đầu tiên được Gia Lai quy hoạch. [S5] (THÔNG TIN ĐỘNG, số liệu 2023)
-- Làng là 1 trong 7 làng dân tộc thiểu số được Gia Lai đầu tư du lịch văn hóa cộng đồng, nhiều năm liền là làng văn hóa. [S7]
-- Làng giữ được bản sắc Jrai dù bao quanh là phố xá. [S2]
-## B. Nhà rông, cây nêu, tượng gỗ, nhà mồ, bến nước
-- Nhà rông là trái tim, biểu tượng và đời sống tinh thần của người Jrai; mọi sinh hoạt văn hóa, lễ hội diễn ra ở khu vực này; là nơi sinh hoạt của thanh niên trong làng. [S2]
-- Nhà rông làng được mô tả làm từ gỗ, tre, nứa; sân trước có cây nêu cao vút, là nơi tổ chức lễ hội và diễn tấu cồng chiêng. [S5]
-- Cây nêu đặt trước nhà rông, là biểu tượng tín ngưỡng của đồng bào Jrai. [S2]
-- Quanh nhà rông có nhiều tượng gỗ thể hiện đủ cung bậc cảm xúc. Trước đây tượng gỗ gắn với tang ma và nhà mồ; nay còn được dùng trang trí không gian làng. Khu trưng bày tượng (tượng thú, đồ vật, người) nằm bên phải nhà rông. Một già làng được VTV nhắc tên là nghệ nhân tạc tượng là Siêu Lũi. [S2][S5]
-- Nhà mồ ở cuối làng với các tượng gỗ theo tín ngưỡng, là nơi thiêng liêng. [S5]
-- Bến nước La O là nơi dân làng lấy nước, giặt giũ; có suối La Nil. Giọt nước là biểu tượng trong đời sống văn hóa của người dân, gắn với tín ngưỡng đa thần của người Jrai. [S5][S3][S4]
-- (Chung về nhà rông Tây Nguyên, không riêng Plei Ơp) Có hai kiểu nhà rông trống (đực) và rông mái (cái); mái nhà rông người Jrai được miêu tả như lưỡi rìu hướng lên trời; nhà rông thường lớn vì quan niệm nhà càng lớn buôn làng càng thịnh vượng. [S6]
-## C. Cồng chiêng và truyền dạy
-- Cồng chiêng là nhạc khí tự vang bằng hợp kim đồng. "Cồng" có núm ở giữa, "chiêng" có mặt phẳng không núm; diễn tấu bằng dùi hoặc tay trần. [S1]
-- Cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng); mỗi chiếc chiêng có thần trú ngụ, chiêng càng cổ càng linh thiêng; âm thanh phản ánh sự giao hòa giữa con người và thiên nhiên. [S1]
-- Không gian văn hóa Cồng chiêng Tây Nguyên: 25/11/2005 được UNESCO công nhận là Kiệt tác truyền khẩu và phi vật thể của nhân loại; 2008 ghi danh vào Danh sách di sản văn hóa phi vật thể đại diện của nhân loại; gồm 5 tỉnh Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng. [S1]
-- Bảo tồn gắn với cộng đồng chủ thể, trao truyền cho thế hệ trẻ; số hóa di sản và du lịch bền vững không được thương mại hóa hay làm méo mó bản sắc. [S1]
-- Làng Ơp có lớp truyền dạy đánh cồng chiêng cho thế hệ trẻ. [S2]
-## D. Phong tục, lễ hội
-- Lễ Pơ Thi (bỏ mả): khoảng tháng 1-4 dương lịch hằng năm; lễ mừng lúa mới: khoảng tháng 11-1 dương lịch. [S5]
-- Lễ cúng bến nước cũng được nhắc đến trong các lễ hội của làng. [S7]
-- Lễ cúng mừng nhà rông mới được phục dựng tại làng (30/4/2026) cho dân làng và du khách; lễ vật gồm heo, gà, rượu cần bày dưới cây nêu; già làng và các bậc cao niên thực hiện nghi thức. [S3][S4]
-- Lễ ăn hỏi truyền thống của người Jrai đang được làng phục dựng theo hướng để du khách trải nghiệm. [S4]
-- Có thể nghe già làng kể khan (hát sử thi truyền thống) để hiểu lịch sử người Jrai. [S5]
-## E. Nghề thủ công, trang phục
-- Dệt thổ cẩm, đan lát, ủ rượu cần, làm nhạc cụ dân tộc, điêu khắc tượng; người làng gìn giữ trang phục truyền thống. [S2][S3][S5]
-## F. Tour và trải nghiệm
-- Tour trải nghiệm văn hóa cộng đồng ra mắt 15/11/2024: tham quan nhà rông, giọt nước, chế biến món truyền thống, homestay nhà ông Puih Alik, tìm hiểu dệt/đan lát/ủ rượu cần, xem cồng chiêng, múa xoang, lửa trại, giao lưu ẩm thực tại sân nhà rông. [S3]
-- Còn có đêm hội cồng chiêng, tour theo chân các cô gái Jrai ra bến nước nghe kể chuyện giọt nước và tượng nhà mồ, tự gùi nước về làng. [S4]
-- Có homestay trong làng. [S5][S3]
-## G. Ẩm thực
-- Gà nướng cơm lam, bò nướng ống tre, lá mì xào cà đắng (VTV); thêm cháo lá mì, muối kiến, thịt heo nướng, rượu cần. [S2][S3][S7]
-- Cẩm nang 2023 ghi có 3 nhà hàng trong làng, món như heo rừng nướng, bò một nắng muối kiến, cá suối nướng ống lồ ô. [S5] (THÔNG TIN ĐỘNG)
-## H. Thông tin thực tế
-- Cẩm nang 2023 ghi tham quan miễn phí mọi ngày trong tuần. [S5] (THÔNG TIN ĐỘNG, KHÔNG xác nhận hiện nay)
-- Mùa đẹp để du lịch Pleiku: mùa khô, khoảng tháng 11-4. [S7]
-- Giờ mở cửa, giá tour, số điện thoại liên hệ, lịch biểu diễn hiện tại: CHƯA CÓ.
-## I. JRAI VERIFIED DATA
-- Plei = làng. (Không có từ hay câu Jrai nào khác đã được xác minh.)
-## J. CHƯA KIỂM CHỨNG (không khẳng định)
-- Lời chào và mọi từ vựng Jrai khác; tên các bộ chiêng cụ thể và số chiếc; "Lễ thổi tai"; lễ đâm trâu; ý nghĩa tên "Ơp"; nghệ nhân đúc chiêng, năm đúc chiêng.
-`;
+    const samplePromise = (async () => {
+      try {
+        return await window.claude.use("sample");
+      } catch (e) {
+        return null;
+      }
+    })();
 
-const RULES = `Bạn là PLEI OP AI, trợ lý hướng dẫn du lịch và văn hóa chuyên biệt cho Làng văn hóa du lịch cộng đồng Plei Ơp (Pleiku, Gia Lai) và các giá trị văn hóa Jrai liên quan trực tiếp.
+    // --- HÀM THÊM TIN NHẮN VÀO GIAO DIỆN ---
+    function add(role, text) {
+      const div = document.createElement("div");
+      div.className = `msg ${role}`;
+      div.textContent = text;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+      return div;
+    }
 
-1. PHẠM VI: chỉ trả lời dựa trên <nguon> và <kien_thuc> bên dưới (CONTEXT): làng Plei Ơp, người Jrai tại làng, nhà rông, cây nêu, tượng gỗ, nhà mồ, bến nước, cồng chiêng, lễ hội, nghề thủ công, ẩm thực, tour. Không dùng kiến thức nhớ sẵn của mô hình làm nguồn sự thật. Không suy đoán, không bịa số liệu, tên người, nghi lễ, tiếng Jrai, không bổ sung chi tiết chỉ vì chúng có vẻ hợp lý.
-2. NO CONTEXT = NO ANSWER: nếu CONTEXT không có thông tin, hoặc thông tin thuộc mục J/ghi "CHƯA CÓ", hãy nói rõ chưa có dữ liệu chính thức đã được xác minh và đề nghị liên hệ ban quản lý làng hoặc già làng. Không đoán.
-3. XUNG ĐỘT NGUỒN: trust=1 ưu tiên hơn trust=2, rồi trust=3. Không để nguồn trust=3 ghi đè nguồn trust thấp hơn số. Nếu các nguồn mâu thuẫn mà không xác định được, nói rõ các nguồn đang khác nhau, không tự chọn.
-4. THÔNG TIN ĐỘNG (địa chỉ hành chính, giá vé, giờ mở cửa, đường đi, điện thoại, lịch biểu diễn, giá dịch vụ, số hộ, số nhà hàng): không khẳng định là hiện tại. Nói: "Tôi chưa có dữ liệu đã được xác minh đủ mới để xác nhận thông tin này." (dịch sang ngôn ngữ khách), có thể nêu thêm thông tin cũ kèm năm nguồn.
-5. NGOÀI PHẠM VI: không trả lời nội dung câu hỏi; từ chối lịch sự bằng ngôn ngữ của khách, ví dụ tiếng Việt: "Xin lỗi, tôi là trợ lý chuyên về Plei Ơp và các giá trị văn hóa Jrai liên quan. Nội dung này nằm ngoài phạm vi kiến thức đã được xác minh của tôi. Bạn có thể hỏi tôi về Plei Ơp, nhà rông, cây nêu, cồng chiêng hoặc văn hóa Jrai tại địa điểm này."
-6. ĐA NGÔN NGỮ: tự nhận diện ngôn ngữ của khách và trả lời bằng chính ngôn ngữ đó (Việt, Anh, Pháp, Trung, Nhật, v.v.). Dịch giữ nguyên ý, không thêm dữ kiện.
-7. TIẾNG JRAI: chỉ dùng từ/câu Jrai có trong mục I (JRAI VERIFIED DATA). Không sáng tạo hay dịch sang Jrai bằng suy đoán. Nếu khách yêu cầu tiếng Jrai mà chưa có bản đã xác minh, nói: "Tôi hiểu yêu cầu của bạn, nhưng hiện tôi chưa có bản dịch tiếng Jrai đã được xác minh cho nội dung này. Tôi có thể trả lời bằng tiếng Việt hoặc ngôn ngữ khác." Nếu khách viết bằng tiếng Jrai và bạn hiểu, chỉ truy xuất kiến thức, trả lời bằng ngôn ngữ khác trừ khi có dữ liệu Jrai đã xác minh.
-8. PHONG CÁCH: thân thiện, lịch sự, rõ ràng; 2-4 đoạn ngắn; giải thích thuật ngữ cho khách nước ngoài; kể chuyện hấp dẫn nhưng không biến chi tiết hư cấu thành sự thật; tôn trọng tín ngưỡng Jrai, không dùng ngôn từ giật gân hay mê tín hóa. Với câu hỏi hiểu lầm văn hóa (như thương mại hóa hoàn toàn cồng chiêng), phản biện khéo theo hướng bảo tồn bền vững gắn với cộng đồng.
-9. TRÍCH NGUỒN: cuối câu trả lời có dòng "Nguồn:" liệt kê tên các nguồn thực sự được dùng, mỗi nguồn một dòng, kèm URL đầy đủ (bắt đầu bằng https://) nếu có trong <nguon>. Không dùng mã [S1]... trong phần trả lời, và không nêu nguồn nếu đang từ chối.
-10. NGỮ CẢNH VR: nếu có <canh_dang_xem>, ưu tiên nội dung đúng cảnh đó rồi gợi ý một điểm liên quan, vẫn chỉ trong CONTEXT.`;
+    function render(element, text) {
+      element.textContent = text;
+    }
 
-/* ===== MÃ CHATBOT ===== */
-const log = document.getElementById("log"), q = document.getElementById("q"),
-      sendBtn = document.getElementById("send"), sceneSel = document.getElementById("scene");
-const history = []; let sample = null;
-SCENES.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = "Cảnh đang xem: " + s; sceneSel.appendChild(o); });
+    function buildTurns() {
+      return history.map(h => ({ role: h.role, content: h.content }));
+    }
 
-function add(role, text) {
-  const d = document.createElement("div");
-  d.className = "m " + (role === "user" ? "u" : "b");
-  d.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
-}
-function render(el, text) {
-  const esc = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  el.innerHTML = esc.replace(/(https?:\/\/[^\s<>"')\]]+?)([.,;:!?]*)(?=\s|$|[)\]])/g,
-    (m, url, tail) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${tail}`);
-}
-function buildTurns() {
-  const scene = sceneSel.value ? `<canh_dang_xem>${sceneSel.value}</canh_dang_xem>\n` : "";
-  const turns = history.map(m => ({ role: m.role, content: m.content }));
-  turns[turns.length - 1].content = scene + turns[turns.length - 1].content;
-  turns[0].content = `${RULES}\n\n<nguon>${SOURCES}</nguon>\n\n<kien_thuc>${KNOWLEDGE}</kien_thuc>\n\n---\nCâu hỏi của khách:\n` + turns[0].content;
-  return turns;
-}
-async function send(text) {
-  text = (text || q.value).trim();
-  if (!text || sendBtn.disabled) return;
-  q.value = ""; add("user", text); history.push({ role: "user", content: text });
-  const bubble = add("assistant", ""); bubble.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
-  sendBtn.disabled = true;
-  try {
-    if (!sample) throw { code: "not_granted" };
-    const r = await sample(buildTurns(), { cache: false, onText: ({ text }) => { render(bubble, text); log.scrollTop = log.scrollHeight; } });
-    render(bubble, r.text); history.push({ role: "assistant", content: r.text });
-  } catch (e) {
-    history.pop();
-    bubble.textContent = e && e.code === "rate_limited" ? "Bạn hỏi nhanh quá, đợi một chút rồi thử lại nhé."
-      : e && e.code === "not_granted" ? "Chatbot cần bạn cho phép sử dụng Claude khi mở trang này."
-      : "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé.";
-  }
-  sendBtn.disabled = false; q.focus();
-}
-sceneSel.onchange = () => { const t = HOTSPOT_INTRO[sceneSel.value]; if (t) add("assistant", t); };
-sendBtn.onclick = () => send();
-q.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
-["Làng Plei Ơp có gì đặc sắc?", "Nhà rông và cây nêu có ý nghĩa gì?", "What can I experience in Plei Ơp?", "Quelle est la signification des gongs ?"].forEach(t => {
-  const b = document.createElement("button"); b.textContent = t; b.onclick = () => send(t); document.getElementById("chips").appendChild(b);
-});
-add("assistant", "Kính chào quý khách! Tôi là PLEI OP AI, trợ lý văn hóa của làng Plei Ơp. Bạn có thể hỏi tôi bằng nhiều ngôn ngữ về nhà rông, cây nêu, cồng chiêng, lễ hội và trải nghiệm tại làng.");
-(async () => {
-  try { sample = await window.claude.use("sample"); } catch (e) { sample = null; }
-  if (!sample) { sendBtn.disabled = true; q.placeholder = "Chatbot chưa khả dụng ở môi trường này"; }
-})();
-</script>
+    // --- HÀM GỬI TIN NHẮN ---
+    async function send(text) {
+      text = (text || q.value).trim();
+      if (!text || sendBtn.disabled) return;
+
+      q.value = "";
+      add("user", text);
+      history.push({ role: "user", content: text });
+
+      const bubble = add("assistant", "");
+      bubble.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
+      sendBtn.disabled = true;
+
+      try {
+        sample = sample || await samplePromise;
+        if (!sample) throw { code: "unavailable" };
+
+        const r = await sample(buildTurns(), {
+          cache: false,
+          onText: ({ text }) => {
+            render(bubble, text);
+            log.scrollTop = log.scrollHeight;
+          }
+        });
+
+        render(bubble, r.text);
+        history.push({ role: "assistant", content: r.text });
+      } catch (e) {
+        console.error("sample error:", e);
+        history.pop();
+        const c = e && e.code;
+        bubble.textContent = 
+          c === "rate_limited" ? "Bạn hỏi nhanh quá, đợi một chút rồi thử lại nhé." :
+          c === "not_granted" ? "Bạn cần cho phép trang sử dụng Claude để chatbot trả lời." :
+          (c === "unavailable" || c === "not_declared" || c === "capability_disabled" || c === "sampling_disabled") ? "Chatbot chưa khả dụng trong môi trường này." :
+          c === "session_expired" ? "Phiên đăng nhập đã hết hạn, hãy đăng nhập lại rồi thử lại." :
+          "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé.";
+      }
+
+      sendBtn.disabled = false;
+      q.focus();
+    }
+
+    // --- LẮNG NGHE SỰ KIỆN NÚT BẤM VÀ PHÍM ENTER ---
+    sendBtn.addEventListener("click", () => send());
+
+    q.addEventListener("keydown", e => {
+      if (e.key === "Enter" && !e.isComposing) {
+        e.preventDefault();
+        send();
+      }
+    });
+  </script>
 </body>
 </html>
