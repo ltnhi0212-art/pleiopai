@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PLEI OP AI · Làng Plei Ơp</title>
+<title>PLEI OP · Làng Ơp</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#fbefd5;--card:#fffaf0;--ink:#2b1a10;--red:#c1272d;--gold:#f2b01e;--green:#2e7d32;--orange:#e8741e;--teal:#16939a;--hero:#2a0f0a;--line:#ecd5a8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -50,7 +50,7 @@ select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3
 <body>
 <header class="hero">
   <div class="gong" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#f2b01e"/><circle cx="32" cy="32" r="22" fill="none" stroke="#c1272d" stroke-width="3"/><circle cx="32" cy="32" r="13" fill="none" stroke="#7a3b10" stroke-width="2"/><circle cx="32" cy="32" r="6" fill="#7a3b10"/></svg></div>
-  <div class="t"><h1>PLEI OP AI</h1><p>Trợ lý hướng dẫn văn hóa · Làng Plei Ơp, Pleiku, Gia Lai</p></div>
+  <div class="t"><h1>PLEI OP </h1><p>Trợ lý hướng dẫn văn hóa · Lang Ơp, Pleiku, Gia Lai</p></div>
   <div class="tools">
     <span class="badge">✔ Dữ liệu đã kiểm chứng · Tiếng Việt</span>
     <a class="vr" href="https://tour.panoee.net/vr360langop" target="_blank" rel="noopener">🥽 Mở tour VR360</a>
@@ -66,17 +66,17 @@ select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3
 <script>
 const SCENES = ["Cổng làng", "Nhà rông", "Cây nêu", "Khu tượng gỗ", "Nhà mồ", "Bến nước", "Bộ cồng chiêng"];
 const HOTSPOT_INTRO = {
-  "Cổng làng": "Kính chào quý khách đến với làng Plei Ơp, ngôi làng của đồng bào Jrai nằm giữa lòng thành phố Pleiku. Bạn muốn tìm hiểu điều gì về nơi đây?",
+  "Cổng làng": "Kính chào quý khách đến với làng Ơp, ngôi làng của đồng bào Jrai nằm giữa lòng thành phố Pleiku. Bạn muốn tìm hiểu điều gì về nơi đây?",
   "Bộ cồng chiêng": "Bạn đang xem Bộ Cồng chiêng. Theo tài liệu của dự án, cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng), gắn với các lễ hội tại nhà rông."
 };
 
 /* ===== NGUỒN (tên hiển thị + link) ===== */
 const SRC = {
-  S1: ["Kho tri thức dự án Số hóa Di sản VR360 làng Plei Ốp", ""],
-  S2: ["VTV.vn, \"Khám phá Plei Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku\" (19/01/2025)", "https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm"],
+  S1: ["Kho tri thức dự án Số hóa Di sản VR360 làng Ơp", ""],
+  S2: ["VTV.vn, \"Khám phá Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku\" (19/01/2025)", "https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm"],
   S3: ["Báo Gia Lai", "https://baogialai.com.vn"],
   S4: ["Tạp chí Người Đưa Tin", "https://nguoiduatin.vn"],
-  S5: ["MIA.vn, \"Làng văn hóa du lịch Plei Ốp, văn hóa bản địa trong lòng thành phố\" (27/09/2023)", "https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969"],
+  S5: ["MIA.vn, \"Làng văn hóa du lịch làng Ơp, văn hóa bản địa trong lòng thành phố\" (27/09/2023)", "https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969"],
   S6: ["Thông tin chung về nhà rông Tây Nguyên (không riêng Plei Ơp)", ""],
   S8: ["VietNamNet - Dân tộc & Phát triển, \"Cồng chiêng - Nhạc khí thiêng của người Gia Rai\" (05/07/2023)", "https://dantocphattrien.vietnamnet.vn/cong-chieng-nhac-khi-thieng-cua-nguoi-gia-rai-45544.html"],
   S9: ["Ủy ban Nhà nước về người Việt Nam ở nước ngoài (SCOV), \"Bảo tồn và phát huy giá trị không gian văn hóa cồng chiêng Tây Nguyên\" (24/02/2020)", "https://scov.gov.vn/ban-sac-van-hoa/bao-ton-va-phat-huy-gia-tri-khong-gian-van-hoa-cong-chieng-tay-nguyen.html"],
@@ -161,7 +161,7 @@ const KNOWLEDGE = `
 - Lời chào và mọi từ vựng Jrai khác; bộ chiêng cụ thể mà làng Plei Ơp đang sở hữu và số chiếc; việc làng Plei Ơp có tổ chức lễ thổi tai hay lễ đâm trâu riêng hay không; ý nghĩa tên "Ơp"; nghệ nhân đúc chiêng, năm đúc chiêng.
 `;
 
-/* ===== CHATBOT NỘI BỘ: miễn phí, chỉ tiếng Việt, không cần AI hay đăng nhập ===== */
+/* ===== CHATBOT chỉ tích hợp tiếng Việt, không có AI  ===== */
 const log = document.getElementById("log"), q = document.getElementById("q"),
       sendBtn = document.getElementById("send"), sceneSel = document.getElementById("scene");
 SCENES.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = "Cảnh đang xem: " + s; sceneSel.appendChild(o); });
@@ -262,7 +262,7 @@ q.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
 ["Làng Plei Ơp có gì đặc sắc?", "Nhà rông và cây nêu có ý nghĩa gì?", "Ở làng có những món ăn gì?", "Cồng chiêng có ý nghĩa gì?"].forEach(t => {
   const b = document.createElement("button"); b.textContent = t; b.onclick = () => send(t); document.getElementById("chips").appendChild(b);
 });
-add("assistant", "Kính chào quý khách! Tôi là PLEI OP AI, trợ lý văn hóa của làng Plei Ơp. Bạn có thể hỏi tôi về nhà rông, cây nêu, cồng chiêng, lễ hội và trải nghiệm tại làng.");
+add("assistant", "Kính chào quý khách! Tôi là PLEI OP, trợ lý văn hóa của làng Ơp. Bạn có thể hỏi tôi về nhà rông, cây nêu, cồng chiêng, lễ hội và trải nghiệm tại làng.");
 </script>
 </body>
 </html>
