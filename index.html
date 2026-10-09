@@ -52,7 +52,7 @@ select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3
   <div class="gong" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#f2b01e"/><circle cx="32" cy="32" r="22" fill="none" stroke="#c1272d" stroke-width="3"/><circle cx="32" cy="32" r="13" fill="none" stroke="#7a3b10" stroke-width="2"/><circle cx="32" cy="32" r="6" fill="#7a3b10"/></svg></div>
   <div class="t"><h1>PLEI OP AI</h1><p>Trợ lý hướng dẫn văn hóa · Làng Plei Ơp, Pleiku, Gia Lai</p></div>
   <div class="tools">
-    <span class="badge">✔ Dữ liệu đã kiểm chứng · Đa ngôn ngữ</span>
+    <span class="badge">✔ Dữ liệu đã kiểm chứng · Tiếng Việt</span>
     <a class="vr" href="https://tour.panoee.net/vr360langop" target="_blank" rel="noopener">🥽 Mở tour VR360</a>
     <select id="scene" aria-label="Cảnh VR360 đang xem"><option value="">Cảnh VR đang xem: (chưa chọn)</option></select>
   </div>
@@ -60,7 +60,7 @@ select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3
 <div class="tho"></div>
 <div id="log"></div>
 <div id="chips"></div>
-<div id="bar"><input id="q" placeholder="Hỏi bằng tiếng Việt, English, Français, 中文, 日本語..." autocomplete="off"><button id="send">Gửi</button></div>
+<div id="bar"><input id="q" placeholder="Hỏi về làng Plei Ơp bằng tiếng Việt..." autocomplete="off"><button id="send">Gửi</button></div>
 <div class="note">Chỉ trả lời dựa trên kho dữ liệu đã kiểm chứng của dự án. Nội dung ngoài kho dữ liệu sẽ được từ chối lịch sự.</div>
 
 <script>
@@ -70,16 +70,16 @@ const HOTSPOT_INTRO = {
   "Bộ cồng chiêng": "Bạn đang xem Bộ Cồng chiêng. Theo tài liệu của dự án, cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng), gắn với các lễ hội tại nhà rông."
 };
 
-/* ===== NGUỒN VÀ ĐỘ TIN CẬY: trust 1 cao nhất, 3 thấp nhất ===== */
-const SOURCES = `
-[S1] trust=1 | Kho tri thức chính thống của dự án Số hóa Di sản VR360 làng Plei Ốp (tổng hợp từ Báo Dân tộc & Phát triển, Cục Du lịch Quốc gia, Ủy ban Nhà nước về người Việt Nam ở nước ngoài - SCOV)
-[S2] trust=2 | VTV.vn, "Khám phá Plei Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku", 19/01/2025 - https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm
-[S3] trust=2 | Báo Gia Lai (baogialai.com.vn - https://baogialai.com.vn): tin ra mắt tour cộng đồng 16/11/2024; tin phục dựng lễ cúng mừng nhà rông mới tại làng Ơp
-[S4] trust=2 | Tạp chí Người Đưa Tin (nguoiduatin.vn - https://nguoiduatin.vn), "Hòa mình vào văn hóa người Jrai giữa lòng phố núi Pleiku", 2026
-[S5] trust=3 | MIA.vn, "Làng văn hóa du lịch Plei Ốp, văn hóa bản địa trong lòng thành phố", 27/09/2023 - https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969
-[S6] trust=3 | Thông tin chung về nhà rông Tây Nguyên (cẩm nang du lịch, tài liệu giáo khoa), KHÔNG riêng cho Plei Ơp
-[S7] trust=2 | Các báo địa phương và trung ương khác (Báo Văn hóa, Nông nghiệp & Môi trường, Gia Lai TV) về quy hoạch làng văn hóa du lịch cộng đồng
-`;
+/* ===== NGUỒN (tên hiển thị + link) ===== */
+const SRC = {
+  S1: ["Kho tri thức dự án Số hóa Di sản VR360 làng Plei Ốp", ""],
+  S2: ["VTV.vn, \"Khám phá Plei Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku\" (19/01/2025)", "https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm"],
+  S3: ["Báo Gia Lai", "https://baogialai.com.vn"],
+  S4: ["Tạp chí Người Đưa Tin", "https://nguoiduatin.vn"],
+  S5: ["MIA.vn, \"Làng văn hóa du lịch Plei Ốp, văn hóa bản địa trong lòng thành phố\" (27/09/2023)", "https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969"],
+  S6: ["Thông tin chung về nhà rông Tây Nguyên (không riêng Plei Ơp)", ""],
+  S7: ["Các báo địa phương và trung ương (Báo Văn hóa, Nông nghiệp & Môi trường, Gia Lai TV)", ""]
+};
 
 const KNOWLEDGE = `
 ## A. Vị trí, quy mô, tên gọi
@@ -128,28 +128,70 @@ const KNOWLEDGE = `
 - Lời chào và mọi từ vựng Jrai khác; tên các bộ chiêng cụ thể và số chiếc; "Lễ thổi tai"; lễ đâm trâu; ý nghĩa tên "Ơp"; nghệ nhân đúc chiêng, năm đúc chiêng.
 `;
 
-const RULES = `Bạn là PLEI OP AI, trợ lý hướng dẫn du lịch và văn hóa chuyên biệt cho Làng văn hóa du lịch cộng đồng Plei Ơp (Pleiku, Gia Lai) và các giá trị văn hóa Jrai liên quan trực tiếp.
-
-1. PHẠM VI: chỉ trả lời dựa trên <nguon> và <kien_thuc> bên dưới (CONTEXT): làng Plei Ơp, người Jrai tại làng, nhà rông, cây nêu, tượng gỗ, nhà mồ, bến nước, cồng chiêng, lễ hội, nghề thủ công, ẩm thực, tour. Không dùng kiến thức nhớ sẵn của mô hình làm nguồn sự thật. Không suy đoán, không bịa số liệu, tên người, nghi lễ, tiếng Jrai, không bổ sung chi tiết chỉ vì chúng có vẻ hợp lý.
-2. NO CONTEXT = NO ANSWER: nếu CONTEXT không có thông tin, hoặc thông tin thuộc mục J/ghi "CHƯA CÓ", hãy nói rõ chưa có dữ liệu chính thức đã được xác minh và đề nghị liên hệ ban quản lý làng hoặc già làng. Không đoán.
-3. XUNG ĐỘT NGUỒN: trust=1 ưu tiên hơn trust=2, rồi trust=3. Không để nguồn trust=3 ghi đè nguồn trust thấp hơn số. Nếu các nguồn mâu thuẫn mà không xác định được, nói rõ các nguồn đang khác nhau, không tự chọn.
-4. THÔNG TIN ĐỘNG (địa chỉ hành chính, giá vé, giờ mở cửa, đường đi, điện thoại, lịch biểu diễn, giá dịch vụ, số hộ, số nhà hàng): không khẳng định là hiện tại. Nói: "Tôi chưa có dữ liệu đã được xác minh đủ mới để xác nhận thông tin này." (dịch sang ngôn ngữ khách), có thể nêu thêm thông tin cũ kèm năm nguồn.
-5. NGOÀI PHẠM VI: không trả lời nội dung câu hỏi; từ chối lịch sự bằng ngôn ngữ của khách, ví dụ tiếng Việt: "Xin lỗi, tôi là trợ lý chuyên về Plei Ơp và các giá trị văn hóa Jrai liên quan. Nội dung này nằm ngoài phạm vi kiến thức đã được xác minh của tôi. Bạn có thể hỏi tôi về Plei Ơp, nhà rông, cây nêu, cồng chiêng hoặc văn hóa Jrai tại địa điểm này."
-6. ĐA NGÔN NGỮ: tự nhận diện ngôn ngữ của khách và trả lời bằng chính ngôn ngữ đó (Việt, Anh, Pháp, Trung, Nhật, v.v.). Dịch giữ nguyên ý, không thêm dữ kiện.
-7. TIẾNG JRAI: chỉ dùng từ/câu Jrai có trong mục I (JRAI VERIFIED DATA). Không sáng tạo hay dịch sang Jrai bằng suy đoán. Nếu khách yêu cầu tiếng Jrai mà chưa có bản đã xác minh, nói: "Tôi hiểu yêu cầu của bạn, nhưng hiện tôi chưa có bản dịch tiếng Jrai đã được xác minh cho nội dung này. Tôi có thể trả lời bằng tiếng Việt hoặc ngôn ngữ khác." Nếu khách viết bằng tiếng Jrai và bạn hiểu, chỉ truy xuất kiến thức, trả lời bằng ngôn ngữ khác trừ khi có dữ liệu Jrai đã xác minh.
-8. PHONG CÁCH: thân thiện, lịch sự, rõ ràng; 2-4 đoạn ngắn; giải thích thuật ngữ cho khách nước ngoài; kể chuyện hấp dẫn nhưng không biến chi tiết hư cấu thành sự thật; tôn trọng tín ngưỡng Jrai, không dùng ngôn từ giật gân hay mê tín hóa. Với câu hỏi hiểu lầm văn hóa (như thương mại hóa hoàn toàn cồng chiêng), phản biện khéo theo hướng bảo tồn bền vững gắn với cộng đồng.
-9. TRÍCH NGUỒN: cuối câu trả lời có dòng "Nguồn:" liệt kê tên các nguồn thực sự được dùng, mỗi nguồn một dòng, kèm URL đầy đủ (bắt đầu bằng https://) nếu có trong <nguon>. Không dùng mã [S1]... trong phần trả lời, và không nêu nguồn nếu đang từ chối.
-10. NGỮ CẢNH VR: nếu có <canh_dang_xem>, ưu tiên nội dung đúng cảnh đó rồi gợi ý một điểm liên quan, vẫn chỉ trong CONTEXT.`;
-
-/* ===== MÃ CHATBOT ===== */
+/* ===== CHATBOT chỉ tích hợp tiếng Việt ===== */
 const log = document.getElementById("log"), q = document.getElementById("q"),
       sendBtn = document.getElementById("send"), sceneSel = document.getElementById("scene");
-const history = []; let sample = null;
-/* Lấy capability "sample" (null nếu trang chưa khai báo capabilities:{sample:{}} khi publish) */
-const samplePromise = (async () => {
-  try { return await window.claude.use("sample"); } catch (e) { return null; }
-})();
 SCENES.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = "Cảnh đang xem: " + s; sceneSel.appendChild(o); });
+
+const norm = s => s.toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
+const STOP = new Set("la co cua va the nao gi o tai nhung cac mot nay khong duoc bao nhieu nhu sao den trong voi cho ve hay minh toi ban biet xin hoi vay a nhe ha thi do kia".split(" "));
+function toks(s) {
+  const w = norm(s).split(" ").filter(x => x && !STOP.has(x)), out = new Set(w);
+  for (let i = 0; i < w.length - 1; i++) out.add(w[i] + "_" + w[i + 1]);
+  return out;
+}
+const ENTRIES = []; let sec = "";
+KNOWLEDGE.split("\n").forEach(l => {
+  if (l.startsWith("## ")) { sec = l.slice(3); return; }
+  if (!l.startsWith("- ") || /^[IJ]\./.test(sec) || l.includes("CHƯA CÓ")) return;
+  const text = l.slice(2).replace(/\s*\[S\d\]/g, "").replace(/\s*\([^)]*THÔNG TIN ĐỘNG[^)]*\)/g, "").trim();
+  ENTRIES.push({ text, ids: [...l.matchAll(/\[(S\d)\]/g)].map(m => m[1]), dyn: l.includes("THÔNG TIN ĐỘNG"), sec, t: toks(text), st: toks(sec) });
+});
+const DF = {};
+ENTRIES.forEach(e => new Set([...e.t, ...e.st]).forEach(k => DF[k] = (DF[k] || 0) + 1));
+const idf = k => Math.log(1 + ENTRIES.length / (DF[k] || 1));
+const score = (qt, e) => { let s = 0; qt.forEach(k => { if (e.t.has(k)) s += idf(k) * (k.includes("_") ? 1.5 : 1); if (e.st.has(k)) s += idf(k) * 0.6; }); return s; };
+const ANCHOR = new Set("plei op lang jrai rong neu cong chieng tuong nha mo nuoc le hoi tour homestay tho cam dan lat ruou thuc nuong mua lich pleiku lai nghe phuc khan xoang yang unesco nguyen hoa truyen".split(" "));
+const pick = (p, i) => ENTRIES.filter(e => e.sec.startsWith(p))[i];
+
+const SYN = [["mon an", "am thuc"], ["an uong", "am thuc"], ["an gi", "am thuc"], ["lam gi", "trai nghiem"], ["choi gi", "trai nghiem"], ["lam nghe", "thu cong det tho cam dan lat"], ["nghe gi", "thu cong det tho cam dan lat"]];
+const DYN = [[/gia ve|gia tour|gia tien|bao nhieu tien|mien phi|phi tham quan/, "mien phi tham quan"],
+  [/dia chi|o phuong|thuoc phuong|duong di|chi duong|di bang|di nhu the nao/, "phuong hoa lu pleiku"],
+  [/bao nhieu ho|bao nhieu nguoi|bao nhieu nha hang/, "ho nguoi nha hang"],
+  [/gio mo|mo cua|dong cua|may gio|dien thoai|so dt|hotline|lien he|lich bieu dien|dat tour|dat phong/, ""]];
+const UNVERIFIED = /bang tieng jrai|dich.*jrai|loi chao|chao.*jrai|tho tai|dam trau|ten cac bo chieng|y nghia ten|duc chieng/;
+const MSG_DYN = "Tôi chưa có dữ liệu đã được xác minh đủ mới để xác nhận thông tin này.";
+const MSG_UNV = "Hiện chưa có dữ liệu chính thức đã được xác minh về nội dung này. Bạn có thể liên hệ ban quản lý làng hoặc già làng để được hướng dẫn chính xác.";
+const MSG_OUT = "Xin lỗi, tôi là trợ lý chuyên về Plei Ơp và các giá trị văn hóa Jrai liên quan. Nội dung này nằm ngoài phạm vi kiến thức đã được xác minh của tôi. Bạn có thể hỏi tôi về Plei Ơp, nhà rông, cây nêu, cồng chiêng hoặc văn hóa Jrai tại địa điểm này.";
+
+function withSources(body, list) {
+  const ids = [...new Set(list.flatMap(e => e.ids))].sort();
+  return body + (ids.length ? "\n\nNguồn:\n" + ids.map(id => SRC[id][0] + (SRC[id][1] ? " - " + SRC[id][1] : "")).join("\n") : "");
+}
+function answer(text) {
+  let n = norm(text);
+  if (/^(xin )?chao|^hello|^alo/.test(n) && n.split(" ").length <= 4) return "Kính chào quý khách! Bạn muốn tìm hiểu điều gì về làng Plei Ơp: nhà rông, cây nêu, cồng chiêng, lễ hội hay trải nghiệm tại làng?";
+  if (/cam on/.test(n)) return "Rất vui được giúp bạn! Bạn cần tìm hiểu thêm điều gì về làng Plei Ơp không?";
+  if (UNVERIFIED.test(n)) return MSG_UNV;
+  if (sceneSel.value && /cai nay|noi nay|day la gi|y nghia/.test(n)) n += " " + norm(sceneSel.value);
+  if (/dac sac|gioi thieu|tong quan|noi bat|co gi hay/.test(n) && /lang|plei/.test(n)) {
+    const list = [pick("A", 0), pick("B", 0), pick("C", 1), pick("F", 0)];
+    return withSources("Theo tài liệu của dự án:\n\n" + list.map(e => "• " + e.text).join("\n"), list);
+  }
+  let extra = "", dyn = false;
+  DYN.forEach(([re, x]) => { if (re.test(n)) { dyn = true; extra += " " + x; } });
+  SYN.forEach(([a, b]) => { if (n.includes(a)) extra += " " + b; });
+  const qt = toks(n + " " + extra);
+  const scored = (dyn ? ENTRIES.filter(e => e.dyn) : ENTRIES).map(e => [score(qt, e), e]).sort((x, y) => y[0] - x[0]);
+  const best = scored[0] ? scored[0][0] : 0;
+  if (dyn) {
+    const list = best >= 2 ? scored.slice(0, 2).filter(([s]) => s >= best * 0.6).map(x => x[1]) : [];
+    return list.length ? withSources(MSG_DYN + "\n\nThông tin cũ để bạn tham khảo (có thể đã thay đổi):\n" + list.map(e => "• " + e.text).join("\n"), list) : MSG_DYN;
+  }
+  if (best < 2 || ![...qt].some(k => ANCHOR.has(k))) return MSG_OUT;
+  const list = scored.slice(0, 3).filter(([s]) => s >= best * 0.6).map(x => x[1]);
+  return withSources("Theo tài liệu của dự án:\n\n" + list.map(e => "• " + e.text).join("\n"), list);
+}
 
 function add(role, text) {
   const d = document.createElement("div");
@@ -161,48 +203,23 @@ function render(el, text) {
   el.innerHTML = esc.replace(/(https?:\/\/[^\s<>"')\]]+?)([.,;:!?]*)(?=\s|$|[)\]])/g,
     (m, url, tail) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>${tail}`);
 }
-function buildTurns() {
-  const scene = sceneSel.value ? `<canh_dang_xem>${sceneSel.value}</canh_dang_xem>\n` : "";
-  const turns = history.map(m => ({ role: m.role, content: m.content }));
-  turns[turns.length - 1].content = scene + turns[turns.length - 1].content;
-  turns[0].content = `${RULES}\n\n<nguon>${SOURCES}</nguon>\n\n<kien_thuc>${KNOWLEDGE}</kien_thuc>\n\n---\nCâu hỏi của khách:\n` + turns[0].content;
-  return turns;
-}
 async function send(text) {
   text = (text || q.value).trim();
   if (!text || sendBtn.disabled) return;
-  q.value = ""; add("user", text); history.push({ role: "user", content: text });
+  q.value = ""; add("user", text);
   const bubble = add("assistant", ""); bubble.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
   sendBtn.disabled = true;
-  try {
-    sample = sample || await samplePromise;
-    if (!sample) throw { code: "unavailable" };
-    const r = await sample(buildTurns(), {
-      cache: false,
-      onText: ({ text }) => { render(bubble, text); log.scrollTop = log.scrollHeight; }
-    });
-    render(bubble, r.text); history.push({ role: "assistant", content: r.text });
-  } catch (e) {
-    console.error("sample error:", e);
-    history.pop();
-    const c = e && e.code;
-    bubble.textContent =
-        c === "rate_limited" ? "Bạn hỏi nhanh quá, đợi một chút rồi thử lại nhé."
-      : c === "not_granted" ? "Bạn cần cho phép trang sử dụng Claude để chatbot trả lời."
-      : (c === "unavailable" || c === "not_declared" || c === "capability_disabled" || c === "sampling_disabled")
-        ? "Chatbot chưa khả dụng trong môi trường này."
-      : c === "session_expired" ? "Phiên đăng nhập đã hết hạn, hãy đăng nhập lại rồi thử lại."
-      : "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé.";
-  }
-  sendBtn.disabled = false; q.focus();
+  await new Promise(r => setTimeout(r, 400));
+  try { render(bubble, answer(text)); } catch (e) { bubble.textContent = "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé."; }
+  log.scrollTop = log.scrollHeight; sendBtn.disabled = false; q.focus();
 }
 sceneSel.onchange = () => { const t = HOTSPOT_INTRO[sceneSel.value]; if (t) add("assistant", t); };
 sendBtn.onclick = () => send();
-q.addEventListener("keydown", e => { if (e.key === "Enter" && !e.isComposing) send(); });
-["Làng Plei Ơp có gì đặc sắc?", "Nhà rông và cây nêu có ý nghĩa gì?", "What can I experience in Plei Ơp?", "Quelle est la signification des gongs ?"].forEach(t => {
+q.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
+["Làng Plei Ơp có gì đặc sắc?", "Nhà rông và cây nêu có ý nghĩa gì?", "Ở làng có những món ăn gì?", "Cồng chiêng có ý nghĩa gì?"].forEach(t => {
   const b = document.createElement("button"); b.textContent = t; b.onclick = () => send(t); document.getElementById("chips").appendChild(b);
 });
-add("assistant", "Kính chào quý khách! Tôi là PLEI OP AI, trợ lý văn hóa của làng Plei Ơp. Bạn có thể hỏi tôi bằng nhiều ngôn ngữ về nhà rông, cây nêu, cồng chiêng, lễ hội và trải nghiệm tại làng.");
+add("assistant", "Kính chào quý khách! Tôi là PLEI OP AI, trợ lý văn hóa của làng Plei Ơp. Bạn có thể hỏi tôi về nhà rông, cây nêu, cồng chiêng, lễ hội và trải nghiệm tại làng.");
 </script>
 </body>
 </html>
