@@ -22,14 +22,13 @@ body{display:flex;flex-direction:column;color:var(--ink);font-family:"Be Vietnam
 .tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .badge{font-size:11.5px;background:rgba(242,176,30,.18);border:1px solid var(--gold);color:var(--gold);padding:3px 9px;border-radius:12px}
 .vr{background:var(--gold);color:#2a0f0a;text-decoration:none;font-weight:600;font-size:13px;padding:6px 12px;border-radius:14px}
-select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3a1710;color:#fff3d6;font:inherit;font-size:13px;max-width:100%}
 .tho{height:12px;flex:none;background-color:#2a0f0a;background-image:linear-gradient(135deg,var(--red) 25%,transparent 25%),linear-gradient(225deg,var(--gold) 25%,transparent 25%),linear-gradient(315deg,var(--green) 25%,transparent 25%),linear-gradient(45deg,var(--orange) 25%,transparent 25%);background-size:24px 12px;background-position:-12px 0,-12px 0,0 0,0 0}
 #log{flex:1;overflow-y:auto;padding:14px 12px;scroll-behavior:smooth}
 .m a{color:inherit;text-decoration:underline;font-weight:600;word-break:break-all}
 .m{max-width:88%;margin:9px 0;padding:10px 14px;border-radius:18px;white-space:pre-wrap;line-height:1.55;overflow-wrap:anywhere;font-size:15px;animation:in .35s ease both}
 .u{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;margin-left:auto;border-bottom-right-radius:4px}
 .b{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-bottom-left-radius:4px;box-shadow:0 3px 10px rgba(80,30,10,.1)}
-.b::before{content:"PLEI OP AI";display:block;font-size:10.5px;letter-spacing:.8px;color:var(--red);font-weight:600;margin-bottom:3px}
+.b::before{content:"PLEI OP";display:block;font-size:10.5px;letter-spacing:.8px;color:var(--red);font-weight:600;margin-bottom:3px}
 .dots i{display:inline-block;width:8px;height:8px;margin:0 2px;border-radius:50%;background:var(--red);animation:bn 1s infinite}
 .dots i:nth-child(2){background:var(--gold);animation-delay:.15s}.dots i:nth-child(3){background:var(--green);animation-delay:.3s}
 @keyframes bn{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-6px);opacity:1}}
@@ -50,33 +49,26 @@ select{padding:7px;border-radius:10px;border:1px solid var(--gold);background:#3
 <body>
 <header class="hero">
   <div class="gong" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#f2b01e"/><circle cx="32" cy="32" r="22" fill="none" stroke="#c1272d" stroke-width="3"/><circle cx="32" cy="32" r="13" fill="none" stroke="#7a3b10" stroke-width="2"/><circle cx="32" cy="32" r="6" fill="#7a3b10"/></svg></div>
-  <div class="t"><h1>PLEI OP </h1><p>Trợ lý hướng dẫn văn hóa · Lang Ơp, Pleiku, Gia Lai</p></div>
+  <div class="t"><h1>PLEI OP</h1><p>Trợ lý hướng dẫn văn hóa · Làng Ơp, Pleiku, Gia Lai</p></div>
   <div class="tools">
     <span class="badge">✔ Dữ liệu đã kiểm chứng · Tiếng Việt</span>
     <a class="vr" href="https://tour.panoee.net/vr360langop" target="_blank" rel="noopener">🥽 Mở tour VR360</a>
-    <select id="scene" aria-label="Cảnh VR360 đang xem"><option value="">Cảnh VR đang xem: (chưa chọn)</option></select>
   </div>
 </header>
 <div class="tho"></div>
 <div id="log"></div>
 <div id="chips"></div>
-<div id="bar"><input id="q" placeholder="Hỏi về làng Plei Ơp bằng tiếng Việt..." autocomplete="off"><button id="send">Gửi</button></div>
+<div id="bar"><input id="q" placeholder="Hỏi về làng Ơp bằng tiếng Việt..." autocomplete="off"><button id="send">Gửi</button></div>
 <div class="note">Chỉ trả lời dựa trên kho dữ liệu đã kiểm chứng của dự án. Nội dung ngoài kho dữ liệu sẽ được từ chối lịch sự.</div>
 
 <script>
-const SCENES = ["Cổng làng", "Nhà rông", "Cây nêu", "Khu tượng gỗ", "Nhà mồ", "Bến nước", "Bộ cồng chiêng"];
-const HOTSPOT_INTRO = {
-  "Cổng làng": "Kính chào quý khách đến với làng Ơp, ngôi làng của đồng bào Jrai nằm giữa lòng thành phố Pleiku. Bạn muốn tìm hiểu điều gì về nơi đây?",
-  "Bộ cồng chiêng": "Bạn đang xem Bộ Cồng chiêng. Theo tài liệu của dự án, cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng), gắn với các lễ hội tại nhà rông."
-};
-
 /* ===== NGUỒN (tên hiển thị + link) ===== */
 const SRC = {
-  S1: ["Kho tri thức dự án Số hóa Di sản VR360 làng Ơp", ""],
-  S2: ["VTV.vn, \"Khám phá Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku\" (19/01/2025)", "https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm"],
+  S1: ["Kho tri thức dự án Số hóa Di sản VR360 làng Plei Ốp", ""],
+  S2: ["VTV.vn, \"Khám phá Plei Ơp - ngôi làng 100 tuổi giữa phố núi Pleiku\" (19/01/2025)", "https://vtv.vn/tin-bai-vtv/kham-pha-plei-op-ngoi-lang-100-tuoi-giua-pho-nui-pleiku-20250118145104785.htm"],
   S3: ["Báo Gia Lai", "https://baogialai.com.vn"],
   S4: ["Tạp chí Người Đưa Tin", "https://nguoiduatin.vn"],
-  S5: ["MIA.vn, \"Làng văn hóa du lịch làng Ơp, văn hóa bản địa trong lòng thành phố\" (27/09/2023)", "https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969"],
+  S5: ["MIA.vn, \"Làng văn hóa du lịch Plei Ốp, văn hóa bản địa trong lòng thành phố\" (27/09/2023)", "https://mia.vn/cam-nang-du-lich/lang-van-hoa-du-lich-plei-op-van-hoa-ban-dia-trong-long-thanh-pho-7969"],
   S6: ["Thông tin chung về nhà rông Tây Nguyên (không riêng Plei Ơp)", ""],
   S8: ["VietNamNet - Dân tộc & Phát triển, \"Cồng chiêng - Nhạc khí thiêng của người Gia Rai\" (05/07/2023)", "https://dantocphattrien.vietnamnet.vn/cong-chieng-nhac-khi-thieng-cua-nguoi-gia-rai-45544.html"],
   S9: ["Ủy ban Nhà nước về người Việt Nam ở nước ngoài (SCOV), \"Bảo tồn và phát huy giá trị không gian văn hóa cồng chiêng Tây Nguyên\" (24/02/2020)", "https://scov.gov.vn/ban-sac-van-hoa/bao-ton-va-phat-huy-gia-tri-khong-gian-van-hoa-cong-chieng-tay-nguyen.html"],
@@ -84,84 +76,101 @@ const SRC = {
   S11: ["Báo Dân tộc và Tôn giáo (Báo Công lý), \"Cây nêu trong văn hóa tín ngưỡng của các dân tộc Tây Nguyên\" (06/10/2023)", "https://dantoctongiao.congly.vn/cay-neu-trong-van-hoa-tin-nguong-cua-cac-dan-toc-tay-nguyen-399768.html"],
   S12: ["Trung tâm Lưu trữ quốc gia I, \"Nguồn gốc, ý nghĩa và nghi thức dựng cây Nêu trong ngày Tết\" (09/02/2021)", "https://www.archives.org.vn/gioi-thieu-tai-lieu-nghiep-vu/nguon-goc-y-nghia-va-nghi-thuc-dung-cay-neu-trong-ngay-tet.htm"],
   S13: ["Báo Gia Lai (theo Báo Kon Tum), \"Cây nêu của người Gia Rai\" (25/12/2021)", "https://baogialai.com.vn/cay-neu-cua-nguoi-gia-rai-post19004.html"],
+  S14: ["Tổng cục Du lịch (vietnamtourism.gov.vn), \"Nét đặc trưng trong cấu tạo và tên gọi cồng chiêng Tây Nguyên\" (06/12/2023)", "https://vietnamtourism.gov.vn/post/54172"],
+  S15: ["Wikipedia, \"Không gian văn hóa cồng chiêng Tây Nguyên\"", "https://vi.wikipedia.org/wiki/Kh%C3%B4ng_gian_v%C4%83n_h%C3%B3a_c%E1%BB%93ng_chi%C3%AAng_T%C3%A2y_Nguy%C3%AAn"],
+  S16: ["Cục Di sản văn hóa (dsvh.gov.vn), \"Không gian văn hóa Cồng chiêng Tây Nguyên\"", "https://dsvh.gov.vn/khong-gian-van-hoa-cong-chieng-tay-nguyen-484"],
   S7: ["Các báo địa phương và trung ương (Báo Văn hóa, Nông nghiệp & Môi trường, Gia Lai TV)", ""]
 };
 
+/* ===== KHO KIẾN THỨC. Mỗi dòng: - {chủ đề|khía cạnh} nội dung [nguồn] ===== */
 const KNOWLEDGE = `
 ## A. Vị trí, quy mô, tên gọi
-- Plei nghĩa là "làng" trong tiếng Jrai; Plei Ơp (Plei Ốp, làng Ơp) là làng của đồng bào Jrai nằm giữa trung tâm Pleiku, Gia Lai. [S7]
-- Làng được VTV cho biết thành lập năm 1927, gần 100 năm tuổi; nhiều nguồn khác gọi là làng cổ hơn 100 năm tuổi. [S2][S5]
-- Các bài cũ ghi làng thuộc phường Hoa Lư; bài gần đây ghi phường Pleiku (sau sắp xếp hành chính). Cách trung tâm thành phố khoảng 3,4 km. [S5][S3] (địa chỉ hành chính là THÔNG TIN ĐỘNG)
-- Theo cẩm nang năm 2023: hơn 100 hộ, hơn 500 người; là làng văn hóa - du lịch đầu tiên được Gia Lai quy hoạch. [S5] (THÔNG TIN ĐỘNG, số liệu 2023)
-- Làng là 1 trong 7 làng dân tộc thiểu số được Gia Lai đầu tư du lịch văn hóa cộng đồng, nhiều năm liền là làng văn hóa. [S7]
-- Làng giữ được bản sắc Jrai dù bao quanh là phố xá. [S2]
+- {lang|lichsu,vitri} Plei nghĩa là "làng" trong tiếng Jrai; Plei Ơp (Plei Ốp, làng Ơp) là làng của đồng bào Jrai nằm giữa trung tâm Pleiku, Gia Lai. [S7]
+- {lang|lichsu} Làng được VTV cho biết thành lập năm 1927, gần 100 năm tuổi; nhiều nguồn khác gọi là làng cổ hơn 100 năm tuổi. [S2][S5]
+- {lang,thucte|vitri} Các bài cũ ghi làng thuộc phường Hoa Lư; bài gần đây ghi phường Pleiku (sau sắp xếp hành chính). Cách trung tâm thành phố khoảng 3,4 km. [S5][S3] (địa chỉ hành chính là THÔNG TIN ĐỘNG)
+- {lang|soluong,lichsu} Theo cẩm nang năm 2023: hơn 100 hộ, hơn 500 người; là làng văn hóa - du lịch đầu tiên được Gia Lai quy hoạch. [S5] (THÔNG TIN ĐỘNG, số liệu 2023)
+- {lang|lichsu} Làng là 1 trong 7 làng dân tộc thiểu số được Gia Lai đầu tư du lịch văn hóa cộng đồng, nhiều năm liền là làng văn hóa. [S7]
+- {lang|ynghia} Làng giữ được bản sắc Jrai dù bao quanh là phố xá. [S2]
 ## B. Nhà rông, cây nêu, tượng gỗ, nhà mồ, bến nước
-- Nhà rông là trái tim, biểu tượng và đời sống tinh thần của người Jrai; mọi sinh hoạt văn hóa, lễ hội diễn ra ở khu vực này; là nơi sinh hoạt của thanh niên trong làng. [S2]
-- Nhà rông làng được mô tả làm từ gỗ, tre, nứa; sân trước có cây nêu cao vút, là nơi tổ chức lễ hội và diễn tấu cồng chiêng. [S5]
-- Cây nêu đặt trước nhà rông, là biểu tượng tín ngưỡng của đồng bào Jrai. [S2]
-- Quanh nhà rông có nhiều tượng gỗ thể hiện đủ cung bậc cảm xúc. Trước đây tượng gỗ gắn với tang ma và nhà mồ; nay còn được dùng trang trí không gian làng. Khu trưng bày tượng (tượng thú, đồ vật, người) nằm bên phải nhà rông. Một già làng được VTV nhắc tên là nghệ nhân tạc tượng là Siêu Lũi. [S2][S5]
-- Nhà mồ ở cuối làng với các tượng gỗ theo tín ngưỡng, là nơi thiêng liêng. [S5]
-- Bến nước La O là nơi dân làng lấy nước, giặt giũ; có suối La Nil. Giọt nước là biểu tượng trong đời sống văn hóa của người dân, gắn với tín ngưỡng đa thần của người Jrai. [S5][S3][S4]
-- (Chung về nhà rông Tây Nguyên, không riêng Plei Ơp) Có hai kiểu nhà rông trống (đực) và rông mái (cái); mái nhà rông người Jrai được miêu tả như lưỡi rìu hướng lên trời; nhà rông thường lớn vì quan niệm nhà càng lớn buôn làng càng thịnh vượng. [S6]
-- (Chung về các dân tộc Tây Nguyên) Cây nêu (còn gọi là cột cúng) có mặt trong hầu hết lễ hội lớn của cư dân bản địa. Cây nêu dựng giữa bãi đất trống trước nhà rông, khẳng định vị thế và khu cư trú của cộng đồng; khi nêu được dựng, các việc lao động tạm dừng để cả buôn làng vui lễ hội. Mọi người đánh chiêng, múa vòng tròn quanh cây nêu theo chiều ngược kim đồng hồ, được giải thích là chiều vận động của mặt trời, phản ánh triết lý âm dương. [S11]
-- Cây nêu là biểu tượng tâm linh và vũ trụ, là trục nối đất với trời, gắn kết các thế hệ, thể hiện sự đoàn kết và tôn vinh văn hóa truyền thống của các dân tộc Tây Nguyên. [S11]
-- Ý nghĩa cây nêu khác nhau theo từng dân tộc: người Jrai và Bana ở Bắc Tây Nguyên dựng nêu trong lễ hội lớn như lễ ăn trâu mừng mùa, lễ mừng nhà rông mới, quan niệm nêu càng cao vút càng thiêng, càng được Giàng nhanh chóng phù hộ bình an, mùa màng tốt tươi. Cư dân Nam Tây Nguyên (M’nông, K’ho) dựng nêu thấp hơn nhưng trang trí hoa văn, màu sắc cầu kỳ; lễ ăn trâu mừng mùa của người M’nông thường có 5-7 cây nêu tượng trưng số gùi lúa thu được, dưới nêu có sạp lễ để già làng khấn mời Giàng. [S11]
-- Người Ê Đê gọi cây nêu là “Gơng drai”; hoa văn trên nêu thay đổi theo từng nghi lễ (tạ ơn, cầu an, cầu no đủ). Cây nêu Ê Đê được xem như một vòng đời người: trên cùng là bắp chuối tượng trưng sự sinh sôi, tiếp theo là 5 hoặc 7 vòng Khơk, cùng các biểu tượng như ché rượu cần, cối giã gạo, nồi đồng, hoa may bốn cánh. [S11]
-- (Chung về người Jrai; bài viết về làng Ba Rgốc, Sa Thầy, không riêng Plei Ơp) Cây nêu của người Jrai được coi là vật thiêng, linh hồn của lễ hội; chỉ dựng khi có lễ lớn ở nhà rông hoặc lễ ăn trâu, ăn dê của làng và gia đình. Ba màu chủ đạo trên cây nêu và đồ vật lễ hội là đen, đỏ, trắng. [S13]
-- Cấu tạo cây nêu Jrai: có hai loại, làm từ cây le (a le), lồ ô (drao) và dây mây (ha vay). Nêu cao 5-7 m đến trên 10 m dùng trong lễ mừng lúa mới: cột chính là cây lồ ô thẳng, trang trí 8-9 tầng vòng tròn nan hình bông lúa (brui), ngọn gắn chùm mũi tên nhỏ hướng lên trời. Nêu thấp phổ biến 3-4 m, không có ngọn cao, dựng trong lễ mừng nhà rông mới, sửa nhà rông, cầu an, mừng nước giọt hay lễ ăn trâu của gia đình. [S13]
-- Thân nêu Jrai gọi là “gâng”, gồm 4 cột gỗ đẽo tròn (có khi 8 cột), viền màu đen đỏ; gọi là “gâng” pao trong lễ ăn trâu và “gâng” pe trong lễ hiến tế dê. Gắn vào thân là các dây nêu (lây la) làm từ cây le mềm như cần câu, treo các hình nan như bông lúa (brui), nan dẹp (reng ech), nan đuôi cá (ku kreng). Gốc nêu có dây buộc trâu hoặc dê bện bằng mây, đầu thòng lọng, gọi là bró. [S13]
-- Người Jrai còn làm nhành nêu nhỏ dài 2-3 m để trang trí: nhành đuôi cá (ku kreng) gắn nan hình nhái (ji krõ) cắm trước nhà rông báo hiệu làng có lễ hội lớn; nhành nan vuông, thoi (leng lep), bông bay (brui) cắm trong sân hoặc hàng rào báo tin vui. Lễ cúng dê, heo, gà không bắt buộc dựng nêu nhưng vẫn cần các nhành nêu này. [S13]
-- Lễ dựng cây nêu của người Jrai thường tổ chức vào buổi chiều: già làng chủ lễ cắt tiết gà pha rượu, quay bát tiết quanh hố nêu 6 vòng ngược chiều kim đồng hồ rồi thêm một vòng và đổ xuống hố, sau đó thanh niên chôn 4 cột gâng và cắm các cành nêu. Đêm sau khi dựng nêu, dân làng thức “khóc trâu”, sáng hôm sau mới làm lễ ăn trâu. [S13]
-- (Chung về người Việt/Kinh, KHÔNG phải của người Jrai) Cây nêu ngày Tết (lễ Thượng tiêu) báo hiệu Tết bắt đầu; theo quan niệm dân gian dùng để xua đuổi ma quỷ và điều xấu năm cũ, cầu năm mới tốt lành; trên ngọn thường treo khánh đất nung, lá dứa, cành đa; có tích truyện kể Phật giúp người trừ quỷ bằng cây nêu treo áo cà sa. Ở Nam Bộ nêu dựng ngày Trừ tịch và hạ nêu mùng 7 Tết. Những năm gần đây tục này mai một; ở một số vùng dân tộc thiểu số vẫn dựng nhưng ý nghĩa trấn quỷ không còn, chủ yếu mang tính tượng trưng, cầu chúc. [S12]
+- {nharong|ynghia} Nhà rông là trái tim, biểu tượng và đời sống tinh thần của người Jrai; mọi sinh hoạt văn hóa, lễ hội diễn ra ở khu vực này; là nơi sinh hoạt của thanh niên trong làng. [S2]
+- {nharong|cautao} Nhà rông làng được mô tả làm từ gỗ, tre, nứa; sân trước có cây nêu cao vút, là nơi tổ chức lễ hội và diễn tấu cồng chiêng. [S5]
+- {nharong|vitri} Đi sâu vào trong làng sẽ thấy mái nhà rông nằm trên bãi cỏ rộng, giữa không gian xanh mát của cây cỏ; khoảng sân phía trước nhà rông có cây nêu và là nơi tổ chức lễ hội, biểu diễn cồng chiêng. [S5]
+- {cayneu|ynghia} Cây nêu đặt trước nhà rông, là biểu tượng tín ngưỡng của đồng bào Jrai. [S2]
+- {tuonggo|ynghia,lichsu,vitri} Quanh nhà rông có nhiều tượng gỗ thể hiện đủ cung bậc cảm xúc. Trước đây tượng gỗ gắn với tang ma và nhà mồ; nay còn được dùng trang trí không gian làng. Khu trưng bày tượng (tượng thú, đồ vật, người) nằm bên phải nhà rông. Một già làng được VTV nhắc tên là nghệ nhân tạc tượng là Siêu Lũi. [S2][S5]
+- {nhamo|vitri,ynghia} Nhà mồ ở cuối làng với các tượng gỗ theo tín ngưỡng, là nơi thiêng liêng. [S5]
+- {bennuoc|ynghia,vitri} Bến nước La O là nơi dân làng lấy nước, giặt giũ; có suối La Nil. Giọt nước là biểu tượng trong đời sống văn hóa của người dân, gắn với tín ngưỡng đa thần của người Jrai. [S5][S3][S4]
+- {nharong|cautao,ynghia} (Chung về nhà rông Tây Nguyên, không riêng Plei Ơp) Có hai kiểu nhà rông trống (đực) và rông mái (cái); mái nhà rông người Jrai được miêu tả như lưỡi rìu hướng lên trời; nhà rông thường lớn vì quan niệm nhà càng lớn buôn làng càng thịnh vượng. [S6]
+- {cayneu|ynghia,nghile,vitri} (Chung về các dân tộc Tây Nguyên) Cây nêu (còn gọi là cột cúng) có mặt trong hầu hết lễ hội lớn của cư dân bản địa. Cây nêu dựng giữa bãi đất trống trước nhà rông, khẳng định vị thế và khu cư trú của cộng đồng; khi nêu được dựng, các việc lao động tạm dừng để cả buôn làng vui lễ hội. Mọi người đánh chiêng, múa vòng tròn quanh cây nêu theo chiều ngược kim đồng hồ, được giải thích là chiều vận động của mặt trời, phản ánh triết lý âm dương. [S11]
+- {cayneu|ynghia} Cây nêu là biểu tượng tâm linh và vũ trụ, là trục nối đất với trời, gắn kết các thế hệ, thể hiện sự đoàn kết và tôn vinh văn hóa truyền thống của các dân tộc Tây Nguyên. [S11]
+- {cayneu|ynghia} Ý nghĩa cây nêu khác nhau theo từng dân tộc: người Jrai và Bana ở Bắc Tây Nguyên dựng nêu trong lễ hội lớn như lễ ăn trâu mừng mùa, lễ mừng nhà rông mới, quan niệm nêu càng cao vút càng thiêng, càng được Giàng nhanh chóng phù hộ bình an, mùa màng tốt tươi. Cư dân Nam Tây Nguyên (M’nông, K’ho) dựng nêu thấp hơn nhưng trang trí hoa văn, màu sắc cầu kỳ; lễ ăn trâu mừng mùa của người M’nông thường có 5-7 cây nêu tượng trưng số gùi lúa thu được, dưới nêu có sạp lễ để già làng khấn mời Giàng. [S11]
+- {cayneu|cautao,ynghia} Người Ê Đê gọi cây nêu là “Gơng drai”; hoa văn trên nêu thay đổi theo từng nghi lễ (tạ ơn, cầu an, cầu no đủ). Cây nêu Ê Đê được xem như một vòng đời người: trên cùng là bắp chuối tượng trưng sự sinh sôi, tiếp theo là 5 hoặc 7 vòng Khơk, cùng các biểu tượng như ché rượu cần, cối giã gạo, nồi đồng, hoa may bốn cánh. [S11]
+- {cayneu|ynghia,nghile} (Chung về người Jrai; bài viết về làng Ba Rgốc, Sa Thầy, không riêng Plei Ơp) Cây nêu của người Jrai được coi là vật thiêng, linh hồn của lễ hội; chỉ dựng khi có lễ lớn ở nhà rông hoặc lễ ăn trâu, ăn dê của làng và gia đình. Ba màu chủ đạo trên cây nêu và đồ vật lễ hội là đen, đỏ, trắng. [S13]
+- {cayneu|cautao} Cấu tạo cây nêu Jrai: có hai loại, làm từ cây le (a le), lồ ô (drao) và dây mây (ha vay). Nêu cao 5-7 m đến trên 10 m dùng trong lễ mừng lúa mới: cột chính là cây lồ ô thẳng, trang trí 8-9 tầng vòng tròn nan hình bông lúa (brui), ngọn gắn chùm mũi tên nhỏ hướng lên trời. Nêu thấp phổ biến 3-4 m, không có ngọn cao, dựng trong lễ mừng nhà rông mới, sửa nhà rông, cầu an, mừng nước giọt hay lễ ăn trâu của gia đình. [S13]
+- {cayneu|cautao} Thân nêu Jrai gọi là “gâng”, gồm 4 cột gỗ đẽo tròn (có khi 8 cột), viền màu đen đỏ; gọi là “gâng” pao trong lễ ăn trâu và “gâng” pe trong lễ hiến tế dê. Gắn vào thân là các dây nêu (lây la) làm từ cây le mềm như cần câu, treo các hình nan như bông lúa (brui), nan dẹp (reng ech), nan đuôi cá (ku kreng). Gốc nêu có dây buộc trâu hoặc dê bện bằng mây, đầu thòng lọng, gọi là bró. [S13]
+- {cayneu|cautao} Người Jrai còn làm nhành nêu nhỏ dài 2-3 m để trang trí: nhành đuôi cá (ku kreng) gắn nan hình nhái (ji krõ) cắm trước nhà rông báo hiệu làng có lễ hội lớn; nhành nan vuông, thoi (leng lep), bông bay (brui) cắm trong sân hoặc hàng rào báo tin vui. Lễ cúng dê, heo, gà không bắt buộc dựng nêu nhưng vẫn cần các nhành nêu này. [S13]
+- {cayneu,lehoi|nghile} Lễ dựng cây nêu của người Jrai thường tổ chức vào buổi chiều: già làng chủ lễ cắt tiết gà pha rượu, quay bát tiết quanh hố nêu 6 vòng ngược chiều kim đồng hồ rồi thêm một vòng và đổ xuống hố, sau đó thanh niên chôn 4 cột gâng và cắm các cành nêu. Đêm sau khi dựng nêu, dân làng thức “khóc trâu”, sáng hôm sau mới làm lễ ăn trâu. [S13]
+- {cayneu|ynghia,lichsu} (Chung về người Việt/Kinh, KHÔNG phải của người Jrai) Cây nêu ngày Tết (lễ Thượng tiêu) báo hiệu Tết bắt đầu; theo quan niệm dân gian dùng để xua đuổi ma quỷ và điều xấu năm cũ, cầu năm mới tốt lành; trên ngọn thường treo khánh đất nung, lá dứa, cành đa; có tích truyện kể Phật giúp người trừ quỷ bằng cây nêu treo áo cà sa. Ở Nam Bộ nêu dựng ngày Trừ tịch và hạ nêu mùng 7 Tết. Những năm gần đây tục này mai một; ở một số vùng dân tộc thiểu số vẫn dựng nhưng ý nghĩa trấn quỷ không còn, chủ yếu mang tính tượng trưng, cầu chúc. [S12]
+- {tuonggo|cautao,nguoi} Để tạo một bức tượng có hồn và gần gũi với dân làng, người tạc tượng cần nhiều trải nghiệm sống và am hiểu văn hóa dân tộc mình. Già làng Siêu Lũi là một nghệ nhân tạc tượng của làng Ơp, làm việc bằng dụng cụ đơn giản như đục, rìu, dao cùng đôi tay khéo léo. [S2]
+- {tuonggo|ynghia,lichsu} Tượng gỗ hình người Jrai và Bahnar được trưng bày tại làng. Trước đây, với người Jrai, tượng gỗ chỉ dành cho người đã khuất và đặt ở các nhà mồ; sau một thời gian dài thay đổi quan niệm, nay chúng là vật trang trí của làng, được xem như “sứ giả văn hóa”, giúp mọi người hiểu rõ hơn giá trị nghệ thuật của loại hình di sản này. Theo VTV, khu trưng bày gồm tượng thú, tượng đồ vật, tượng người đặt bên phải nhà rông. [S5][S2]
+- {lang,bennuoc|trainghiem} Đi dọc đường làng, du khách thấy người dân trồng lúa, chăm vườn, trò chuyện; người dân chất phác, hiếu khách. Ở bến nước La O có cảnh dân làng giặt giũ, lấy nước sinh hoạt; cuối làng là nhà mồ với các tượng gỗ theo tín ngưỡng; có thể thư giãn bên dòng suối La Nil. [S5]
+- {tour,lehoi|trainghiem} Du khách có thể nghe già làng kể khan, được già làng dẫn đi thăm các nghề truyền thống như dệt thổ cẩm, đan lát, làm nhạc cụ dân tộc. Đúng dịp lễ hội có thể hòa vào tiếng cồng chiêng, nhảy điệu truyền thống cùng buôn làng và thưởng thức rượu cần tại sân nhà rông. [S5]
+- {nghe,congchieng|trainghiem} Du khách đến làng Ơp được thưởng thức điệu xoang và tiếng cồng chiêng; trang phục truyền thống và nghề dệt thổ cẩm vẫn được người làng gìn giữ. Thanh âm cồng chiêng nay còn vang giữa đô thị Pleiku. [S2]
 ## C. Cồng chiêng và truyền dạy
-- Cồng chiêng là nhạc khí tự vang bằng hợp kim đồng. "Cồng" có núm ở giữa, "chiêng" có mặt phẳng không núm; diễn tấu bằng dùi hoặc tay trần. [S1]
-- Cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng); mỗi chiếc chiêng có thần trú ngụ, chiêng càng cổ càng linh thiêng; âm thanh phản ánh sự giao hòa giữa con người và thiên nhiên. [S1]
-- Không gian văn hóa Cồng chiêng Tây Nguyên: 25/11/2005 được UNESCO công nhận là Kiệt tác truyền khẩu và phi vật thể của nhân loại; 2008 ghi danh vào Danh sách di sản văn hóa phi vật thể đại diện của nhân loại; gồm 5 tỉnh Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng. [S1]
-- Bảo tồn gắn với cộng đồng chủ thể, trao truyền cho thế hệ trẻ; số hóa di sản và du lịch bền vững không được thương mại hóa hay làm méo mó bản sắc. [S1]
-- Làng Ơp có lớp truyền dạy đánh cồng chiêng cho thế hệ trẻ. [S2]
-- (Chung về người Jrai ở Gia Lai, không riêng Plei Ơp) Người Jrai không tự đúc cồng chiêng mà mua hoặc trao đổi từ nơi khác, nhưng có tài thẩm âm và chỉnh chiêng điêu luyện. Cồng chiêng là tài sản quý, thước đo giàu sang và quyền uy; gia đình, dòng họ có nhiều cồng chiêng và ché (ghè) được nhiều người kính nể. [S8]
-- (Chung về người Jrai ở Gia Lai, không xác nhận làng Plei Ơp dùng bộ nào) Người Jrai có nhiều bộ chiêng, mỗi bộ có tên, số chiếc và nghi lễ riêng: Aráp là bộ cổ truyền, còn gọi là “chiêng múa”, dùng cho vòng xoang; M’nhum dùng trong lễ vui, uống rượu cần (1 chiêng sar, 3 cồng núm, 5 chiêng bằng, kèm trống lớn); Nâm gồm 8 chiếc (1 sar, 2 cồng núm, 5 chiêng bằng) dùng trong lễ mừng nhà mới, cưới, cầu sức khỏe và không đánh trong lễ buồn như tang, bỏ mả. [S8]
-- (tiếp, chung về người Jrai ở Gia Lai) M’lem (còn gọi Ơi Yăh) là bộ chiêng nhỏ, quý của dòng họ Rơmah, chỉ dùng trong lễ gia đình, dòng họ; T’rum gồm 3 cồng núm, dùng trong lễ hội vui của gia đình, cộng đồng; Vang là bộ chiêng của các Pơtao Apui (Vua Lửa), gồm 3 cồng núm kèm trống lớn, đánh trong lễ cúng cầu mưa, cầu sức khỏe; Honh là bộ thông dụng nhất, truyền thống gồm 5 cồng núm và 8 chiêng bằng; Knăh ring gồm 6 chiếc (1 cồng núm, 5 chiêng bằng) dùng trong lễ cầu sức khỏe; Kông kleo gồm 3 cồng núm và 7 chiêng bằng, dùng trong cả lễ vui lẫn buồn. [S8]
-- Cồng chiêng không chỉ là nhạc cụ mà là linh vật thiêng: đồng bào tin mỗi mặt chiêng có thần trú ngụ, chiêng càng cổ thì thần càng mạnh. Cồng chiêng là phương tiện giao tiếp với cộng đồng, thiên nhiên và đấng siêu nhiên, nên chỉ dùng trong biểu diễn, sinh hoạt cộng đồng hoặc nghi lễ của gia đình, buôn làng. [S8]
-- Theo nhà nghiên cứu Phan Đăng Nhật, thần chiêng có đời sống tình cảm (vui, buồn, giận hờn) và có “gia đình” chiêng mẹ, chiêng bố, chiêng con; thần giúp con người giàu sang, hạnh phúc, nhưng bị xúc phạm thì có thể gây tai họa. Dùng chiêng vào bất kỳ mục đích nào cũng phải được thần cho phép. [S10]
-- (Tục chung ở nhiều dân tộc Trường Sơn - Tây Nguyên) Khi có bộ chiêng mới, ngoài việc thẩm âm còn phải cúng chiêng để được thần chiêng chứng nhận: già làng hoặc chủ nhà khấn Yàng, lễ vật gồm ché rượu cần, gà (lấy tiết vẩy lên chiêng), cơm lam; thả vài hạt gạo vào ché rượu, hạt đứng thẳng nghĩa là thần chấp thuận, hạt nằm ngang là chưa, phải khấn lại. [S10]
-- Vai trò trong nghi lễ (theo bài viết về người Jrai ở Gia Lai): lễ thổi tai, lễ trưởng thành - chiêng mời thần linh chứng kiến sự ra đời, trưởng thành của đứa trẻ; lễ bỏ mả - tiếng chiêng tiễn linh hồn người chết; lễ mừng nhà mới, cúng cơm mới - mời thần linh chứng giám. Trước khi đánh bộ chiêng Vang phải cúng heo hoặc gà và rượu để xin phép thần chiêng; đánh lạc nhịp được quan niệm làm Yàng nổi giận. [S8]
-- Ngày nay nghi lễ giản lược, người đánh chiêng giỏi giảm, việc truyền dạy ít tự nguyện nên tính thiêng phai nhạt. Di sản cần bảo vệ là cả “không gian văn hóa cồng chiêng” (lễ hội, phong tục và nhận thức của cộng đồng chủ thể), để cộng đồng tự bảo tồn và phát huy. [S8][S10]
-- Không gian văn hóa cồng chiêng Tây Nguyên trải trên 5 tỉnh, tập hợp 17 dân tộc thiểu số; UNESCO công nhận ngày 25/11/2005. Cồng chiêng được xem là ngôn ngữ giao tiếp hàng đầu giữa con người, thần linh và thế giới siêu nhiên; cồng chiêng của mỗi gia đình thể hiện tài sản, quyền lực và sự an toàn. [S9]
-- Theo bài viết trên SCOV, cồng chiêng là loại hình di sản có từ nền văn hóa Đông Sơn, ít nhất 3.500-4.000 năm; trống đồng và cồng chiêng là hai nhạc cụ điển hình. Mỗi dân tộc Tây Nguyên dùng cồng chiêng theo cách riêng để chơi bản nhạc của dân tộc mình. [S9]
-- Cồng chiêng làm bằng hợp kim đồng, có khi pha vàng, bạc hoặc đồng đen; cồng có núm, chiêng không núm. Đường kính thường 20-60 cm, loại cực đại tới 90-120 cm; dùng đơn lẻ hoặc theo bộ từ 2 đến 12-13 chiếc, có nơi 18-20 chiếc, trong đó chiêng mẹ (chiêng cái) quan trọng nhất; đánh bằng dùi hoặc tay. [S9]
-- Khi diễn tấu theo vòng tròn, nghệ nhân đánh và di chuyển dàn chiêng từ phải sang trái (ngược chiều thời gian), mang ý nghĩa quay về nguồn cội. Người Jrai và Bana thường mang cồng chiêng lên vai, đánh theo điệu múa vòng tròn; buổi diễn trong lễ hội thường có rượu cần để cúng Giàng (trời). [S9]
-- PGS.TS Nguyễn Thụy Loan nêu cồng chiêng có nhiều giá trị: biểu thị đặc trưng vùng và tộc người, giá trị nghệ thuật, sử dụng đa dạng, vật chất, biểu thị giàu sang quyền uy, tinh thần, cố kết cộng đồng và lịch sử. Tây Nguyên được xem là cái nôi của loại hình nghệ thuật này. [S9]
-- Cồng chiêng gắn với cả đời người Tây Nguyên: lễ thổi tai (tiếng chiêng là tín hiệu văn hóa đầu tiên với đứa trẻ, theo bài viết), cúng tế, tang ma, cưới xin, mừng năm mới, nhà mới, lúa mới, nghi lễ nông nghiệp, cầu sức khỏe và may mắn. Trong các sử thi như Đam San, Xinh Nhã có nhiều giai thoại thần kỳ về chiêng. [S9]
-- Xưa có những chiếc chiêng được ví bằng giá hai con voi hoặc hàng chục con trâu; nhà có nhiều chiêng quý là nhà có quyền lực, giàu có. Nạn mua bán làm số lượng cồng chiêng giảm mạnh, thanh niên ít biết đánh. Bài viết SCOV có ảnh minh họa đánh cồng chiêng, múa hát mừng ngày khánh thành làng văn hóa du lịch Pleôp. [S9]
-- Các giải pháp bảo tồn được nêu: khôi phục lễ hội cồng chiêng, lập đội cồng chiêng, xây dựng làng văn hóa thanh niên (đoàn viên phải biết đánh chiêng, múa hát), phục hồi xưởng chế tác, tuyên truyền, khảo cứu điền dã, lập phòng lưu trữ, đào tạo trong các trường nghệ thuật ở Gia Lai, Đắk Lắk và Đại học Tây Nguyên. Theo số liệu năm 2020, Kon Tum có 100% xã, phường có đội cồng chiêng với 1.853 bộ. [S9] (THÔNG TIN ĐỘNG, số liệu 2020)
+- {congchieng|cautao} Cồng chiêng là nhạc khí tự vang bằng hợp kim đồng. "Cồng" có núm ở giữa, "chiêng" có mặt phẳng không núm; diễn tấu bằng dùi hoặc tay trần. [S1]
+- {congchieng|ynghia} Cồng chiêng là nhạc khí thiêng, vật trung gian nối con người với thần linh (Yàng); mỗi chiếc chiêng có thần trú ngụ, chiêng càng cổ càng linh thiêng; âm thanh phản ánh sự giao hòa giữa con người và thiên nhiên. [S1]
+- {congchieng|lichsu} Không gian văn hóa Cồng chiêng Tây Nguyên: 25/11/2005 được UNESCO công nhận là Kiệt tác truyền khẩu và phi vật thể của nhân loại; 2008 ghi danh vào Danh sách di sản văn hóa phi vật thể đại diện của nhân loại; gồm 5 tỉnh Kon Tum, Gia Lai, Đắk Lắk, Đắk Nông, Lâm Đồng. [S1]
+- {congchieng|baoton} Bảo tồn gắn với cộng đồng chủ thể, trao truyền cho thế hệ trẻ; số hóa di sản và du lịch bền vững không được thương mại hóa hay làm méo mó bản sắc. [S1]
+- {congchieng,lang|baoton,trainghiem} Làng Ơp có lớp truyền dạy đánh cồng chiêng cho thế hệ trẻ. [S2]
+- {congchieng|lichsu,ynghia} (Chung về người Jrai ở Gia Lai, không riêng Plei Ơp) Người Jrai không tự đúc cồng chiêng mà mua hoặc trao đổi từ nơi khác, nhưng có tài thẩm âm và chỉnh chiêng điêu luyện. Cồng chiêng là tài sản quý, thước đo giàu sang và quyền uy; gia đình, dòng họ có nhiều cồng chiêng và ché (ghè) được nhiều người kính nể. [S8]
+- {congchieng|cautao} (Chung về người Jrai ở Gia Lai, không xác nhận làng Plei Ơp dùng bộ nào) Người Jrai có nhiều bộ chiêng, mỗi bộ có tên, số chiếc và nghi lễ riêng: Aráp là bộ cổ truyền, còn gọi là “chiêng múa”, dùng cho vòng xoang; M’nhum dùng trong lễ vui, uống rượu cần (1 chiêng sar, 3 cồng núm, 5 chiêng bằng, kèm trống lớn); Nâm gồm 8 chiếc (1 sar, 2 cồng núm, 5 chiêng bằng) dùng trong lễ mừng nhà mới, cưới, cầu sức khỏe và không đánh trong lễ buồn như tang, bỏ mả. [S8]
+- {congchieng|cautao} (tiếp, chung về người Jrai ở Gia Lai) M’lem (còn gọi Ơi Yăh) là bộ chiêng nhỏ, quý của dòng họ Rơmah, chỉ dùng trong lễ gia đình, dòng họ; T’rum gồm 3 cồng núm, dùng trong lễ hội vui của gia đình, cộng đồng; Vang là bộ chiêng của các Pơtao Apui (Vua Lửa), gồm 3 cồng núm kèm trống lớn, đánh trong lễ cúng cầu mưa, cầu sức khỏe; Honh là bộ thông dụng nhất, truyền thống gồm 5 cồng núm và 8 chiêng bằng; Knăh ring gồm 6 chiếc (1 cồng núm, 5 chiêng bằng) dùng trong lễ cầu sức khỏe; Kông kleo gồm 3 cồng núm và 7 chiêng bằng, dùng trong cả lễ vui lẫn buồn. [S8]
+- {congchieng|ynghia} Cồng chiêng không chỉ là nhạc cụ mà là linh vật thiêng: đồng bào tin mỗi mặt chiêng có thần trú ngụ, chiêng càng cổ thì thần càng mạnh. Cồng chiêng là phương tiện giao tiếp với cộng đồng, thiên nhiên và đấng siêu nhiên, nên chỉ dùng trong biểu diễn, sinh hoạt cộng đồng hoặc nghi lễ của gia đình, buôn làng. [S8]
+- {congchieng|ynghia} Theo nhà nghiên cứu Phan Đăng Nhật, thần chiêng có đời sống tình cảm (vui, buồn, giận hờn) và có “gia đình” chiêng mẹ, chiêng bố, chiêng con; thần giúp con người giàu sang, hạnh phúc, nhưng bị xúc phạm thì có thể gây tai họa. Dùng chiêng vào bất kỳ mục đích nào cũng phải được thần cho phép. [S10]
+- {congchieng|nghile} (Tục chung ở nhiều dân tộc Trường Sơn - Tây Nguyên) Khi có bộ chiêng mới, ngoài việc thẩm âm còn phải cúng chiêng để được thần chiêng chứng nhận: già làng hoặc chủ nhà khấn Yàng, lễ vật gồm ché rượu cần, gà (lấy tiết vẩy lên chiêng), cơm lam; thả vài hạt gạo vào ché rượu, hạt đứng thẳng nghĩa là thần chấp thuận, hạt nằm ngang là chưa, phải khấn lại. [S10]
+- {congchieng,lehoi|nghile,ynghia} Vai trò trong nghi lễ (theo bài viết về người Jrai ở Gia Lai): lễ thổi tai, lễ trưởng thành - chiêng mời thần linh chứng kiến sự ra đời, trưởng thành của đứa trẻ; lễ bỏ mả - tiếng chiêng tiễn linh hồn người chết; lễ mừng nhà mới, cúng cơm mới - mời thần linh chứng giám. Trước khi đánh bộ chiêng Vang phải cúng heo hoặc gà và rượu để xin phép thần chiêng; đánh lạc nhịp được quan niệm làm Yàng nổi giận. [S8]
+- {congchieng|baoton} Ngày nay nghi lễ giản lược, người đánh chiêng giỏi giảm, việc truyền dạy ít tự nguyện nên tính thiêng phai nhạt. Di sản cần bảo vệ là cả “không gian văn hóa cồng chiêng” (lễ hội, phong tục và nhận thức của cộng đồng chủ thể), để cộng đồng tự bảo tồn và phát huy. [S8][S10]
+- {congchieng|lichsu,ynghia} Không gian văn hóa cồng chiêng Tây Nguyên trải trên 5 tỉnh, tập hợp 17 dân tộc thiểu số; UNESCO công nhận ngày 25/11/2005. Cồng chiêng được xem là ngôn ngữ giao tiếp hàng đầu giữa con người, thần linh và thế giới siêu nhiên; cồng chiêng của mỗi gia đình thể hiện tài sản, quyền lực và sự an toàn. [S9]
+- {congchieng|lichsu} Theo bài viết trên SCOV, cồng chiêng là loại hình di sản có từ nền văn hóa Đông Sơn, ít nhất 3.500-4.000 năm; trống đồng và cồng chiêng là hai nhạc cụ điển hình. Mỗi dân tộc Tây Nguyên dùng cồng chiêng theo cách riêng để chơi bản nhạc của dân tộc mình. [S9]
+- {congchieng|cautao} Cồng chiêng làm bằng hợp kim đồng, có khi pha vàng, bạc hoặc đồng đen; cồng có núm, chiêng không núm. Đường kính thường 20-60 cm, loại cực đại tới 90-120 cm; dùng đơn lẻ hoặc theo bộ từ 2 đến 12-13 chiếc, có nơi 18-20 chiếc, trong đó chiêng mẹ (chiêng cái) quan trọng nhất; đánh bằng dùi hoặc tay. [S9]
+- {congchieng|nghile,ynghia} Khi diễn tấu theo vòng tròn, nghệ nhân đánh và di chuyển dàn chiêng từ phải sang trái (ngược chiều thời gian), mang ý nghĩa quay về nguồn cội. Người Jrai và Bana thường mang cồng chiêng lên vai, đánh theo điệu múa vòng tròn; buổi diễn trong lễ hội thường có rượu cần để cúng Giàng (trời). [S9]
+- {congchieng|ynghia} PGS.TS Nguyễn Thụy Loan nêu cồng chiêng có nhiều giá trị: biểu thị đặc trưng vùng và tộc người, giá trị nghệ thuật, sử dụng đa dạng, vật chất, biểu thị giàu sang quyền uy, tinh thần, cố kết cộng đồng và lịch sử. Tây Nguyên được xem là cái nôi của loại hình nghệ thuật này. [S9]
+- {congchieng,lehoi|nghile,ynghia} Cồng chiêng gắn với cả đời người Tây Nguyên: lễ thổi tai (tiếng chiêng là tín hiệu văn hóa đầu tiên với đứa trẻ, theo bài viết), cúng tế, tang ma, cưới xin, mừng năm mới, nhà mới, lúa mới, nghi lễ nông nghiệp, cầu sức khỏe và may mắn. Trong các sử thi như Đam San, Xinh Nhã có nhiều giai thoại thần kỳ về chiêng. [S9]
+- {congchieng|ynghia,baoton} Xưa có những chiếc chiêng được ví bằng giá hai con voi hoặc hàng chục con trâu; nhà có nhiều chiêng quý là nhà có quyền lực, giàu có. Nạn mua bán làm số lượng cồng chiêng giảm mạnh, thanh niên ít biết đánh. Bài viết SCOV có ảnh minh họa đánh cồng chiêng, múa hát mừng ngày khánh thành làng văn hóa du lịch Pleôp. [S9]
+- {congchieng|baoton,soluong} Các giải pháp bảo tồn được nêu: khôi phục lễ hội cồng chiêng, lập đội cồng chiêng, xây dựng làng văn hóa thanh niên (đoàn viên phải biết đánh chiêng, múa hát), phục hồi xưởng chế tác, tuyên truyền, khảo cứu điền dã, lập phòng lưu trữ, đào tạo trong các trường nghệ thuật ở Gia Lai, Đắk Lắk và Đại học Tây Nguyên. Theo số liệu năm 2020, Kon Tum có 100% xã, phường có đội cồng chiêng với 1.853 bộ. [S9] (THÔNG TIN ĐỘNG, số liệu 2020)
+- {congchieng|lichsu,cautao} Cách gọi “cồng” hay “chiêng” ở Tây Nguyên tùy từng địa phương, từng dân tộc. Tên của mỗi chiếc chiêng trong dàn thường đặt theo thành viên gia đình (cha, mẹ, anh, chị, em), nên tên gọi khác nhau theo ngôn ngữ mỗi dân tộc. Ví dụ người M’nông gọi các chiêng là May, Loa, Thơ, Thết, Rnui, Nđớt; người Êđê gọi là Ana, Hluê, Hliang, Mđu, Mđu Khơk, Moong, Moong Khơk. [S14]
+- {congchieng|lichsu,cautao} Theo Wikipedia: Không gian văn hóa cồng chiêng Tây Nguyên được UNESCO công nhận ngày 25/11/2005, là di sản thứ hai của Việt Nam nhận danh hiệu này sau Nhã nhạc cung đình Huế. Không gian văn hóa gồm các yếu tố: cồng chiêng, các bản nhạc tấu bằng cồng chiêng, người chơi cồng chiêng, các lễ hội có dùng cồng chiêng (lễ mừng lúa mới, lễ cúng bến nước...) và những địa điểm tổ chức lễ hội (nhà dài, nhà rông, nhà gươl, rẫy, bến nước, nhà mồ, các khu rừng cạnh buôn làng). [S15]
+- {congchieng|lichsu,cautao} Theo Cục Di sản văn hóa: chủ nhân của di sản là 17 dân tộc thiểu số thuộc nhóm ngôn ngữ Nam Á và Nam Đảo; có giả thuyết văn hóa cồng chiêng bắt nguồn từ văn minh Đông Sơn. Xưa nay người Tây Nguyên không tự chế tác mà mua cồng chiêng của người Kinh từ Quảng Nam, Quảng Ngãi, hoặc của người Lào, Campuchia, rồi nắn chỉnh lại để có âm thanh mong muốn; mỗi làng có một người chuyên chỉnh chiêng. [S16]
 ## D. Phong tục, lễ hội
-- Lễ Pơ Thi (bỏ mả): khoảng tháng 1-4 dương lịch hằng năm; lễ mừng lúa mới: khoảng tháng 11-1 dương lịch. [S5]
-- Lễ cúng bến nước cũng được nhắc đến trong các lễ hội của làng. [S7]
-- Lễ cúng mừng nhà rông mới được phục dựng tại làng (30/4/2026) cho dân làng và du khách; lễ vật gồm heo, gà, rượu cần bày dưới cây nêu; già làng và các bậc cao niên thực hiện nghi thức. [S3][S4]
-- Lễ ăn hỏi truyền thống của người Jrai đang được làng phục dựng theo hướng để du khách trải nghiệm. [S4]
-- Có thể nghe già làng kể khan (hát sử thi truyền thống) để hiểu lịch sử người Jrai. [S5]
-- (Chung về Tây Nguyên, không riêng Plei Ơp) Trong lễ hội đâm trâu tại nhà rông, già làng chủ lễ đứng gần cột buộc trâu, thanh niên nam nữ đánh chiêng cồng, múa phía sau; khi già làng khấn xong, tiếng chiêng nổi lên hòa với tiếng hú của dân làng. Đây cũng là những ngày hội của nghệ thuật cồng chiêng vì nhiều nhà mang bộ chiêng của mình đến tham dự. [S9]
+- {lehoi|nghile,lichsu} Lễ Pơ Thi (bỏ mả): khoảng tháng 1-4 dương lịch hằng năm; lễ mừng lúa mới: khoảng tháng 11-1 dương lịch. [S5]
+- {lehoi,bennuoc|nghile} Lễ cúng bến nước cũng được nhắc đến trong các lễ hội của làng. [S7]
+- {lehoi,nharong|nghile} Lễ cúng mừng nhà rông mới được phục dựng tại làng (30/4/2026) cho dân làng và du khách; lễ vật gồm heo, gà, rượu cần bày dưới cây nêu; già làng và các bậc cao niên thực hiện nghi thức. [S3][S4]
+- {lehoi|nghile,trainghiem} Lễ ăn hỏi truyền thống của người Jrai đang được làng phục dựng theo hướng để du khách trải nghiệm. [S4]
+- {lehoi,nghe|trainghiem} Có thể nghe già làng kể khan (hát sử thi truyền thống) để hiểu lịch sử người Jrai. [S5]
+- {lehoi|nghile} (Chung về Tây Nguyên, không riêng Plei Ơp) Trong lễ hội đâm trâu tại nhà rông, già làng chủ lễ đứng gần cột buộc trâu, thanh niên nam nữ đánh chiêng cồng, múa phía sau; khi già làng khấn xong, tiếng chiêng nổi lên hòa với tiếng hú của dân làng. Đây cũng là những ngày hội của nghệ thuật cồng chiêng vì nhiều nhà mang bộ chiêng của mình đến tham dự. [S9]
 ## E. Nghề thủ công, trang phục
-- Dệt thổ cẩm, đan lát, ủ rượu cần, làm nhạc cụ dân tộc, điêu khắc tượng; người làng gìn giữ trang phục truyền thống. [S2][S3][S5]
+- {nghe|cautao,trainghiem} Dệt thổ cẩm, đan lát, ủ rượu cần, làm nhạc cụ dân tộc, điêu khắc tượng; người làng gìn giữ trang phục truyền thống. [S2][S3][S5]
 ## F. Tour và trải nghiệm
-- Tour trải nghiệm văn hóa cộng đồng ra mắt 15/11/2024: tham quan nhà rông, giọt nước, chế biến món truyền thống, homestay nhà ông Puih Alik, tìm hiểu dệt/đan lát/ủ rượu cần, xem cồng chiêng, múa xoang, lửa trại, giao lưu ẩm thực tại sân nhà rông. [S3]
-- Còn có đêm hội cồng chiêng, tour theo chân các cô gái Jrai ra bến nước nghe kể chuyện giọt nước và tượng nhà mồ, tự gùi nước về làng. [S4]
-- Có homestay trong làng. [S5][S3]
+- {tour|trainghiem} Tour trải nghiệm văn hóa cộng đồng ra mắt 15/11/2024: tham quan nhà rông, giọt nước, chế biến món truyền thống, homestay nhà ông Puih Alik, tìm hiểu dệt/đan lát/ủ rượu cần, xem cồng chiêng, múa xoang, lửa trại, giao lưu ẩm thực tại sân nhà rông. [S3]
+- {tour|trainghiem} Còn có đêm hội cồng chiêng, tour theo chân các cô gái Jrai ra bến nước nghe kể chuyện giọt nước và tượng nhà mồ, tự gùi nước về làng. [S4]
+- {tour|luutru} Có homestay trong làng. [S5][S3]
 ## G. Ẩm thực
-- Gà nướng cơm lam, bò nướng ống tre, lá mì xào cà đắng (VTV); thêm cháo lá mì, muối kiến, thịt heo nướng, rượu cần. [S2][S3][S7]
-- Cẩm nang 2023 ghi có 3 nhà hàng trong làng, món như heo rừng nướng, bò một nắng muối kiến, cá suối nướng ống lồ ô. [S5] (THÔNG TIN ĐỘNG)
+- {amthuc|monan} Gà nướng cơm lam, bò nướng ống tre, lá mì xào cà đắng (VTV); thêm cháo lá mì, muối kiến, thịt heo nướng, rượu cần. [S2][S3][S7]
+- {amthuc|soluong} Cẩm nang 2023 ghi có 3 nhà hàng trong làng, món như heo rừng nướng, bò một nắng muối kiến, cá suối nướng ống lồ ô. [S5] (THÔNG TIN ĐỘNG)
+- {amthuc|monan} Người dân thu thập sản vật thiên nhiên (thịt rừng, món cây nhà lá vườn). Món không nên bỏ qua: bò nướng ống tre, lá mì xào cà đắng và đặc biệt gà nướng cơm lam. Gà nướng được làm công phu: chọn nuôi gà và có cách chế biến riêng; bò nướng ống tre chế biến đơn giản trong ống lồ ô nhưng hương vị độc đáo. [S2]
 ## H. Thông tin thực tế
-- Cẩm nang 2023 ghi tham quan miễn phí mọi ngày trong tuần. [S5] (THÔNG TIN ĐỘNG, KHÔNG xác nhận hiện nay)
-- Mùa đẹp để du lịch Pleiku: mùa khô, khoảng tháng 11-4. [S7]
+- {thucte|giave} Cẩm nang 2023 ghi tham quan miễn phí mọi ngày trong tuần. [S5] (THÔNG TIN ĐỘNG, KHÔNG xác nhận hiện nay)
+- {thucte|thoidiem} Mùa đẹp để du lịch Pleiku: mùa khô, khoảng tháng 11-4. [S7]
 - Giờ mở cửa, giá tour, số điện thoại liên hệ, lịch biểu diễn hiện tại: CHƯA CÓ.
+- {thucte|vitri,dichuyen} (Thông tin năm 2023) Từ quảng trường Đại Đoàn Kết (Pleiku) đi taxi hoặc xe máy: theo hướng Tây Bắc vào đường Lý Tự Trọng khoảng 300 m, rẽ phải vào Phan Đình Phùng đi khoảng 400 m, rẽ phải vào Phạm Văn Đồng (QL14) khoảng 130 m; tại vòng xuyến đi lối ra thứ 3 vào đường Cách Mạng Tháng Tám tới Công viên Đồng Xanh, đi thẳng thêm khoảng 1,6 km, rẽ trái vào đường Bùi Dự đi khoảng 550 m là tới làng. Đường vào làng trải nhựa, có đèn chiếu sáng ban đêm. [S5] (THÔNG TIN ĐỘNG)
+- {thucte|dichuyen,giave} (Thông tin năm 2023) Từ TP.HCM ra Pleiku: máy bay khoảng 1 giờ 10 phút, có các hãng Bamboo Airways, Vietjet Air, Vietnam Airlines, Pacific Airlines, giá tham khảo 99.000-1.500.000 đồng/vé (chưa thuế phí). Xe khách mất 9-15 giờ, giá 220.000-550.000 đồng/vé, ví dụ các nhà xe Việt Tân Phát, Đức Đạt, Phước Hưng, Bảy Lang, Thuận Ý. [S5] (THÔNG TIN ĐỘNG)
+- {tour|luutru} (Thông tin năm 2023) Ngoài homestay trong làng, du khách có thể nghỉ ở khách sạn gần làng như Khách sạn Pleiku, khách sạn Hoàng Nhi, homestay Nhà Tôi. [S5] (THÔNG TIN ĐỘNG)
 ## I. JRAI VERIFIED DATA
 - Plei = làng. (Không có từ hay câu Jrai nào khác đã được xác minh.)
 ## J. CHƯA KIỂM CHỨNG (không khẳng định)
 - Lời chào và mọi từ vựng Jrai khác; bộ chiêng cụ thể mà làng Plei Ơp đang sở hữu và số chiếc; việc làng Plei Ơp có tổ chức lễ thổi tai hay lễ đâm trâu riêng hay không; ý nghĩa tên "Ơp"; nghệ nhân đúc chiêng, năm đúc chiêng.
 `;
 
-/* ===== CHATBOT chỉ tích hợp tiếng Việt, không có AI  ===== */
+/* ===== CHATBOT NỘI BỘ: hiểu câu hỏi theo CHỦ ĐỀ + KHÍA CẠNH, miễn phí, không cần AI ===== */
 const log = document.getElementById("log"), q = document.getElementById("q"),
       sendBtn = document.getElementById("send"), sceneSel = document.getElementById("scene");
 SCENES.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = "Cảnh đang xem: " + s; sceneSel.appendChild(o); });
@@ -177,9 +186,15 @@ const exact = s => new Set(s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").spl
 const ENTRIES = []; let sec = "";
 KNOWLEDGE.split("\n").forEach(l => {
   if (l.startsWith("## ")) { sec = l.slice(3); return; }
-  if (!l.startsWith("- ") || /^[IJ]\./.test(sec) || l.includes("CHƯA CÓ")) return;
-  const text = l.slice(2).replace(/\s*\[S\d\]/g, "").replace(/\s*\([^)]*THÔNG TIN ĐỘNG[^)]*\)/g, "").trim();
-  ENTRIES.push({ text, ids: [...l.matchAll(/\[(S\d)\]/g)].map(m => m[1]), dyn: l.includes("THÔNG TIN ĐỘNG"), sec, t: toks(text), st: toks(sec), x: exact(text), len: toks(text).size, lead: toks(text.replace(/^\([^)]*\)\s*/, "").split(" ").slice(0, 4).join(" ")) });
+  if (!l.startsWith("- ") || /^[IJ]\./.test(sec) && !l.startsWith("- {") || l.includes("CHƯA CÓ")) return;
+  const tg = l.match(/^- \{([^|}]*)\|([^}]*)\}\s*/);
+  if (!tg) return;
+  const body = l.slice(tg[0].length);
+  const text = body.replace(/\s*\[S\d+\]/g, "").replace(/\s*\([^)]*THÔNG TIN ĐỘNG[^)]*\)/g, "").trim();
+  ENTRIES.push({ text, ids: [...body.matchAll(/\[(S\d+)\]/g)].map(m => m[1]), dyn: body.includes("THÔNG TIN ĐỘNG"), sec,
+    ents: tg[1].split(",").filter(Boolean), facs: tg[2].split(",").filter(Boolean),
+    t: toks(text), st: toks(sec), x: exact(text), len: toks(text).size,
+    lead: toks(text.replace(/^\([^)]*\)\s*/, "").split(" ").slice(0, 4).join(" ")) });
 });
 const DF = {};
 ENTRIES.forEach(e => new Set([...e.t, ...e.st]).forEach(k => DF[k] = (DF[k] || 0) + 1));
@@ -193,9 +208,50 @@ const score = (qt, qx, e) => {
 const ANCHOR = new Set("plei op lang jrai rong neu cong chieng tuong nha mo nuoc le hoi tour homestay tho cam dan lat ruou thuc nuong mua lich pleiku lai nghe phuc khan xoang yang unesco nguyen hoa truyen".split(" "));
 const pick = (p, i) => ENTRIES.filter(e => e.sec.startsWith(p))[i];
 
+/* CHỦ ĐỀ (câu hỏi nói về cái gì) và KHÍA CẠNH (hỏi điều gì về nó) */
+const ENT = [
+  ["nharong", "nhà rông", /(^| )(nha )?rong( |$)/],
+  ["cayneu", "cây nêu", /cay neu|cot cung|gang (pao|pe)|nhanh neu|dung neu/],
+  ["congchieng", "cồng chiêng", /chieng/],
+  ["tuonggo", "tượng gỗ", /tuong go|tac tuong|tuong (nguoi|thu)|khu (trung bay )?tuong/],
+  ["nhamo", "nhà mồ", /nha mo/],
+  ["bennuoc", "bến nước", /ben nuoc|la o( |$)|la nil|suoi|giot nuoc/],
+  ["lehoi", "lễ hội và phong tục", /le hoi|po thi|bo ma|thoi tai|dam trau|an trau|khoc trau|an hoi|mung lua moi|le mung|le cung|khan|xoang|phong tuc|tuc le/],
+  ["nghe", "nghề thủ công", /det|tho cam|dan lat|ruou can|trang phuc|nghe thu cong|nhac cu|lam nghe|nghe gi/],
+  ["tour", "tour và trải nghiệm", /tour|homestay|trai nghiem|tham quan|luu tru|khach san|o lai|nghi lai/],
+  ["amthuc", "ẩm thực", /am thuc|mon an|an gi|an uong|nha hang|ga nuong|bo nuong|com lam|dac san|heo rung|muoi kien/],
+  ["thucte", "thông tin thực tế", /duong di|di nhu the nao|di bang|may bay|xe khach|cach trung tam|mua nao|thoi diem|khi nao di|dia chi/],
+  ["lang", "làng Plei Ơp", /plei|(^| )op( |$)|lang/]
+];
+const FAC = [
+  ["cautao", "cấu tạo, hình dáng", /cau tao|hinh dang|lam bang|chat lieu|nguyen lieu|kich thuoc|cao bao nhieu|bao nhieu met|mau sac|may loai|may kieu|bo phan|gom nhung|duong kinh|lam nhu the nao|cach lam|ten cac|nhung bo nao|bo chieng|co nhung loai|loai nao/],
+  ["ynghia", "ý nghĩa", /y nghia|bieu tuong|tin nguong|tam linh|thieng|than chieng|linh hon|tuong trung|de lam gi|dung de lam|tac dung|vai tro|chuc nang/],
+  ["lichsu", "lịch sử, nguồn gốc, tên gọi", /lich su|nguon goc|thanh lap|bao nhieu tuoi|nam nao|tu khi nao|ra doi|ten goi|goi la|unesco|cong nhan|di san|do ai|ai lam ra/],
+  ["nghile", "nghi lễ, cách dùng", /nghi le|nghi thuc|khi nao (dung|danh|duoc)|dung khi nao|dip nao|danh khi nao|cach dung|le (cung|dung|mung)|cung chieng/],
+  ["baoton", "bảo tồn, truyền dạy", /bao ton|phat huy|gin giu|truyen day|lop hoc|hoc danh|mai mot|phai nhat|thuc trang|giai phap/],
+  ["vitri", "vị trí, đường đi", /o dau|vi tri|nam o|dia chi|cach trung tam/],
+  ["soluong", "số lượng, quy mô", /so luong|quy mo|bao nhieu (ho|nguoi|bo|chiec|nha)|may (ho|nguoi|bo|chiec)/],
+  ["trainghiem", "trải nghiệm, hoạt động", /trai nghiem|tham quan|hoat dong|tour|choi gi|co the lam gi|lam gi o/],
+  ["luutru", "nơi lưu trú", /luu tru|homestay|khach san|o lai|nghi lai|ngu lai/],
+  ["giave", "giá vé", /gia ve|ve vao|mien phi|phi tham quan|bao nhieu tien/],
+  ["monan", "món ăn", /mon an|an gi|am thuc|mon ngon|dac san|nha hang/],
+  ["dichuyen", "cách di chuyển", /may bay|xe khach|duong di|di nhu the nao|di bang/],
+  ["thoidiem", "thời điểm", /mua nao|thoi diem|khi nao di|thang may/],
+  ["nguoi", "nghệ nhân", /nghe nhan|ai (tac|danh)|gia lang/]
+];
+const LABEL = Object.fromEntries([...ENT, ...FAC].map(x => [x[0], x[1]]));
+const SUGG = {
+  ynghia: l => `${l[0].toUpperCase() + l.slice(1)} có ý nghĩa gì?`, cautao: l => `Cấu tạo, hình dáng của ${l}?`,
+  lichsu: l => `Lịch sử, nguồn gốc của ${l}?`, nghile: l => `Nghi lễ liên quan đến ${l}?`,
+  baoton: l => `Việc bảo tồn ${l} ra sao?`, soluong: l => `Số lượng, quy mô của ${l}?`, vitri: l => `${l[0].toUpperCase() + l.slice(1)} nằm ở đâu?`
+};
+const SUGG_ENT = ["nharong", "cayneu", "congchieng", "tuonggo", "nhamo", "bennuoc", "lang"];
+
 const SYN = [["mon an", "am thuc"], ["an uong", "am thuc"], ["an gi", "am thuc"], ["co the lam gi", "trai nghiem"], ["o lang lam gi", "trai nghiem"], ["choi gi", "trai nghiem"], ["lam nghe", "thu cong det tho cam dan lat"], ["nghe gi", "thu cong det tho cam dan lat"], ["cau tao", "cot than gang nan le lo o may"], ["nguyen lieu", "cot than gang nan le lo o may"], ["ngay tet", "tet nguyen dan"], ["bao ton", "bao ton phat huy"], ["unesco", "unesco khong gian van hoa"], ["loai", "kieu"], ["met", "m"], ["khac nhau", "num khong num"], ["lam ra", "duc mua trao doi tham am"], ["ai lam", "duc mua trao doi tham am"], ["y nghia", "thieng bieu tuong than linh"]];
 const DYN = [[/gia ve|gia tour|gia tien|bao nhieu tien|mien phi|phi tham quan|tien ve|ve vao|ve tham quan|phi vao|mat phi|vao cua/, "mien phi tham quan"],
-  [/dia chi|o phuong|thuoc phuong|duong di|chi duong|di bang|di nhu the nao/, "phuong hoa lu pleiku"],
+  [/dia chi|o phuong|thuoc phuong/, "phuong hoa lu pleiku"],
+  [/may bay|xe khach|tu (tp|thanh pho|sai gon|ha noi|da nang)|hcm|ho chi minh/, "may bay xe khach"],
+  [/duong di|di nhu the nao|di the nao|di bang|chi duong/, "quang truong dai doan ket duong"],
   [/bao nhieu ho|bao nhieu nguoi|bao nhieu nha hang/, "ho nguoi nha hang"],
   [/gio mo|mo cua|dong cua|may gio|dien thoai|so dt|hotline|lien he|lich bieu dien|dat tour|dat phong/, ""]];
 const UNVERIFIED = /bang tieng jrai|dich.*jrai|loi chao|chao.*jrai|y nghia (cua )?ten (lang|plei|op)|ten (lang|plei|op) co nghia/;
@@ -203,10 +259,13 @@ const MSG_DYN = "Tôi chưa có dữ liệu đã được xác minh đủ mới 
 const MSG_UNV = "Hiện chưa có dữ liệu chính thức đã được xác minh về nội dung này. Bạn có thể liên hệ ban quản lý làng hoặc già làng để được hướng dẫn chính xác.";
 const MSG_OUT = "Xin lỗi, tôi là trợ lý chuyên về Plei Ơp và các giá trị văn hóa Jrai liên quan. Nội dung này nằm ngoài phạm vi kiến thức đã được xác minh của tôi. Bạn có thể hỏi tôi về Plei Ơp, nhà rông, cây nêu, cồng chiêng hoặc văn hóa Jrai tại địa điểm này.";
 
+const bullet = e => "• " + e.text + (e.dyn ? " (⚠ thông tin có thể đã thay đổi)" : "");
 function withSources(body, list) {
-  const ids = [...new Set(list.flatMap(e => e.ids))].sort();
+  const ids = [...new Set(list.flatMap(e => e.ids))].sort((a, b) => a.slice(1) - b.slice(1));
   return body + (ids.length ? "\n\nNguồn:\n" + ids.map(id => SRC[id][0] + (SRC[id][1] ? " - " + SRC[id][1] : "")).join("\n") : "");
 }
+const detect = (n, arr) => arr.filter(x => x[2].test(n)).map(x => x[0]);
+
 function answer(text) {
   let n = norm(text);
   if (/^(xin )?chao|^hello|^alo/.test(n) && n.split(" ").length <= 4) return "Kính chào quý khách! Bạn muốn tìm hiểu điều gì về làng Plei Ơp: nhà rông, cây nêu, cồng chiêng, lễ hội hay trải nghiệm tại làng?";
@@ -215,25 +274,45 @@ function answer(text) {
   if (sceneSel.value && /cai nay|noi nay|day la gi|y nghia/.test(n)) n += " " + norm(sceneSel.value);
   if (/dac sac|gioi thieu|tong quan|noi bat|co gi hay/.test(n) && /lang|plei/.test(n)) {
     const list = [pick("A", 0), pick("B", 0), pick("C", 1), pick("F", 0)];
-    return withSources("Theo tài liệu của dự án:\n\n" + list.map(e => "• " + e.text).join("\n"), list);
+    return withSources("Theo tài liệu của dự án:\n\n" + list.map(bullet).join("\n"), list);
   }
-  let extra = "", dyn = false, topic = "";
-  DYN.forEach(([re, x]) => { if (re.test(n)) { dyn = true; topic += " " + x; } });
+  let dyn = false, topic = "";
+  DYN.forEach(([re, x], i) => { if (re.test(n) && !(i === 3 && topic.includes("may bay"))) { dyn = true; topic += " " + x; } });
   if (dyn) {
     const sd = ENTRIES.filter(e => e.dyn).map(e => [score(toks(topic), new Set(), e), e]).sort((x, y) => y[0] - x[0]);
     const list = topic.trim() && sd[0] && sd[0][0] >= 2 ? sd.slice(0, 2).filter(([s]) => s >= sd[0][0] * 0.6).map(x => x[1]) : [];
     return list.length ? withSources(MSG_DYN + "\n\nThông tin cũ để bạn tham khảo (có thể đã thay đổi):\n" + list.map(e => "• " + e.text).join("\n"), list) : MSG_DYN;
   }
+  let extra = "";
   const padded = " " + n + " ";
   SYN.forEach(([a, b]) => { if (padded.includes(" " + a + " ")) extra += " " + b; });
   const qt = toks(n + " " + extra), qx = exact(text);
-  const food = /am thuc|mon an|an gi|an uong|do an|dac san|nha hang/.test(n);
-  const pool = food ? ENTRIES.filter(e => e.sec.startsWith("G")) : ENTRIES;
-  const scored = pool.map(e => { const r = score(qt, qx, e); return [r, r / Math.pow(e.len, 0.2), e]; }).sort((x, y) => y[1] - x[1]);
-  const raw = scored[0] ? scored[0][0] : 0, best = scored[0] ? scored[0][1] : 0;
-  if (raw < 2 || ![...qt].some(k => ANCHOR.has(k))) return MSG_OUT;
-  const list = scored.slice(0, 3).filter(x => x[1] >= best * 0.6).map(x => x[2]);
-  return withSources("Theo tài liệu của dự án:\n\n" + list.map(e => "• " + e.text).join("\n"), list);
+  let ents = detect(n, ENT);
+  const strong = ents.filter(k => k !== "lang");
+  if (strong.length) ents = strong;
+  const facs = detect(n, FAC).slice(0, 2);
+  let pool = ents.length ? ENTRIES.filter(e => e.ents.some(k => ents.includes(k))) : ENTRIES;
+  if (!pool.length) pool = ENTRIES;
+  const scored = pool.map(e => {
+    const r = score(qt, qx, e);
+    return { e, r, s: r / Math.pow(e.len, 0.2) + (facs.some(f => e.facs.includes(f)) ? 6 : 0) + ents.filter(k => e.ents.includes(k)).length * 2 };
+  }).sort((a, b) => b.s - a.s);
+  const top = scored[0];
+  if (!top || (!ents.length && (top.r < 2 || ![...qt].some(k => ANCHOR.has(k))))) return MSG_OUT;
+  const hit = facs.length > 0 && scored.some(x => facs.some(f => x.e.facs.includes(f)));
+  const cand = hit ? scored.filter(x => facs.some(f => x.e.facs.includes(f))) : scored;
+  const list = cand.filter((x, i) => i < 3 && x.s >= cand[0].s * (hit ? 0.55 : 0.7)).map(x => x.e);
+  const lab = ents.map(k => LABEL[k]).join(", "), flab = facs.map(f => LABEL[f]).join(", ");
+  const head = !ents.length ? "Theo tài liệu của dự án:"
+    : facs.length && !hit ? `Kho dữ liệu đã kiểm chứng chưa có thông tin về ${flab} của ${lab}. Thông tin gần nhất:`
+    : `Về ${lab}${hit ? " – " + flab : ""}, theo tài liệu của dự án:`;
+  const main = ents.find(k => SUGG_ENT.includes(k));
+  let sugg = [];
+  if (main) {
+    const have = new Set(ENTRIES.filter(e => e.ents.includes(main)).flatMap(e => e.facs));
+    sugg = Object.keys(SUGG).filter(f => have.has(f) && !(hit && facs.includes(f))).slice(0, 4).map(f => SUGG[f](LABEL[main]));
+  }
+  return { text: withSources(head + "\n\n" + list.map(bullet).join("\n"), list), sugg };
 }
 
 function add(role, text) {
@@ -253,7 +332,15 @@ async function send(text) {
   const bubble = add("assistant", ""); bubble.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
   sendBtn.disabled = true;
   await new Promise(r => setTimeout(r, 400));
-  try { render(bubble, answer(text)); } catch (e) { bubble.textContent = "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé."; }
+  try {
+    const res = answer(text), out = typeof res === "string" ? { text: res, sugg: [] } : res;
+    render(bubble, out.text);
+    if (out.sugg.length) {
+      const sg = document.createElement("div"); sg.className = "sg";
+      out.sugg.forEach(t => { const b = document.createElement("button"); b.textContent = t; b.onclick = () => send(t); sg.appendChild(b); });
+      bubble.appendChild(sg);
+    }
+  } catch (e) { bubble.textContent = "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé."; }
   log.scrollTop = log.scrollHeight; sendBtn.disabled = false; q.focus();
 }
 sceneSel.onchange = () => { const t = HOTSPOT_INTRO[sceneSel.value]; if (t) add("assistant", t); };
