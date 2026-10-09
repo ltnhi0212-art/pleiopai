@@ -43,6 +43,9 @@ body{display:flex;flex-direction:column;color:var(--ink);font-family:"Be Vietnam
 #q:focus{border-color:var(--gold)}
 #send{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:0;border-radius:26px;padding:0 22px;cursor:pointer;font:600 15px "Be Vietnam Pro",sans-serif}
 #send:disabled{opacity:.5}
+.sg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sg button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:14px;padding:5px 11px;font:inherit;font-size:12.5px;cursor:pointer}
+.sg button:hover{background:var(--gold);color:#2a0f0a}
 .note{text-align:center;font-size:11px;opacity:.7;padding:0 12px 8px}
 </style>
 </head>
@@ -170,10 +173,9 @@ const KNOWLEDGE = `
 - Lời chào và mọi từ vựng Jrai khác; bộ chiêng cụ thể mà làng Plei Ơp đang sở hữu và số chiếc; việc làng Plei Ơp có tổ chức lễ thổi tai hay lễ đâm trâu riêng hay không; ý nghĩa tên "Ơp"; nghệ nhân đúc chiêng, năm đúc chiêng.
 `;
 
-/* ===== CHATBOT NỘI BỘ: hiểu câu hỏi theo CHỦ ĐỀ + KHÍA CẠNH, miễn phí, không cần AI ===== */
+/* ===== CHATBOT NỘI BỘ: hiểu câu hỏi theo CHỦ ĐỀ + KHÍA CẠNH, miễn phí, chỉ tích hợp tiếng Việt, không tích hợp AI ===== */
 const log = document.getElementById("log"), q = document.getElementById("q"),
-      sendBtn = document.getElementById("send"), sceneSel = document.getElementById("scene");
-SCENES.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = "Cảnh đang xem: " + s; sceneSel.appendChild(o); });
+      sendBtn = document.getElementById("send");
 
 const norm = s => s.toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
 const STOP = new Set("la co cua va the nao gi o tai nhung cac mot nay khong duoc bao nhieu nhu sao den trong voi cho ve hay minh toi ban biet xin hoi vay a nhe ha thi do kia y nghia de lam khi dau ai may cach ra vao khac nhau cai".split(" "));
@@ -271,7 +273,6 @@ function answer(text) {
   if (/^(xin )?chao|^hello|^alo/.test(n) && n.split(" ").length <= 4) return "Kính chào quý khách! Bạn muốn tìm hiểu điều gì về làng Plei Ơp: nhà rông, cây nêu, cồng chiêng, lễ hội hay trải nghiệm tại làng?";
   if (/cam on/.test(n)) return "Rất vui được giúp bạn! Bạn cần tìm hiểu thêm điều gì về làng Plei Ơp không?";
   if (UNVERIFIED.test(n)) return MSG_UNV;
-  if (sceneSel.value && /cai nay|noi nay|day la gi|y nghia/.test(n)) n += " " + norm(sceneSel.value);
   if (/dac sac|gioi thieu|tong quan|noi bat|co gi hay/.test(n) && /lang|plei/.test(n)) {
     const list = [pick("A", 0), pick("B", 0), pick("C", 1), pick("F", 0)];
     return withSources("Theo tài liệu của dự án:\n\n" + list.map(bullet).join("\n"), list);
@@ -343,7 +344,6 @@ async function send(text) {
   } catch (e) { bubble.textContent = "Xin lỗi, mình đang gặp sự cố. Bạn thử lại sau nhé."; }
   log.scrollTop = log.scrollHeight; sendBtn.disabled = false; q.focus();
 }
-sceneSel.onchange = () => { const t = HOTSPOT_INTRO[sceneSel.value]; if (t) add("assistant", t); };
 sendBtn.onclick = () => send();
 q.addEventListener("keydown", e => { if (e.key === "Enter") send(); });
 ["Làng Plei Ơp có gì đặc sắc?", "Nhà rông và cây nêu có ý nghĩa gì?", "Ở làng có những món ăn gì?", "Cồng chiêng có ý nghĩa gì?"].forEach(t => {
